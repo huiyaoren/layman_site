@@ -86,6 +86,10 @@ var __main = function () {
         };
 
         game.draw = function () {
+            // Draw background
+            game.context.fillStyle = "gray";
+            game.context.fillRect(0, 0, 400, 300);
+
             game.drawImage(paddle);
             game.drawImage(ball);
 
