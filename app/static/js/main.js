@@ -85,6 +85,34 @@ var __main = function () {
             }
         };
 
+        var enableDrag = false;
+        game.canvas.addEventListener('mousedown', function (event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            log('down')
+            if (ball.hasPoint(x, y)) {
+                // Set drag status
+                enableDrag = true;
+            }
+        });
+
+        game.canvas.addEventListener('mousemove', function (event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            log('move');
+            if(enableDrag) {
+                ball.x = x;
+                ball.y = y;
+            }
+        });
+
+        game.canvas.addEventListener('mouseup', function (event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+            log('up');
+            enableDrag = false;
+        });
+
         game.draw = function () {
             // Draw background
             game.context.fillStyle = "gray";
@@ -96,13 +124,17 @@ var __main = function () {
             for (var i = 0; i < blocks.length; i++) {
                 var block = blocks[i];
                 if (block.alive) {
-                    log(block);
+                    // log(block);
                     game.drawImage(block);
                 }
             }
 
+            game.context.fillStyle = "black";
             game.context.fillText('分数：' + score, 10, 290);
         };
+
+
+
     });
 
 
