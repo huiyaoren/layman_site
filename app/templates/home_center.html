@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home-center</title>
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 99vh;
+        }
+
+        .bb {
+            border: solid 1px black;
+        }
+
+        .block {
+            border: solid 1px black;
+            transition: width 0.7s ease-out;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
+            height: 50%;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time {
+            font-size: 200px;
+        }
+
+        .left, .right {
+            display: flex;
+            width: 200px;
+            flex: 1;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/utils.js')}}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="00 block">
+        <h1 class="time">11:30</h1>
+    </div>
+    <div class="01 block">2</div>
+    <div class="10 block">3</div>
+    <div class="11 block">
+        <div class="left">
+            <ul class="">
+                <li>todo list 1</li>
+                <li>todo list 2</li>
+                <li>todo list 3</li>
+                <li>todo list 4</li>
+                <li>todo list 5</li>
+                <li>todo list 6</li>
+                <li>todo list 7</li>
+            </ul>
+        </div>
+        <div class="right">
+
+            <ul class="">
+                <li>todo list 1</li>
+                <li>todo list 2</li>
+                <li>todo list 3</li>
+                <li>todo list 4</li>
+                <li>todo list 5</li>
+                <li>todo list 6</li>
+                <li>todo list 7</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script></script>
+</html>

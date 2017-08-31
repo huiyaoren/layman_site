@@ -21,7 +21,7 @@ var enableDebugMode = function (game, enabled) {
     window.addEventListener('keydown', function (event) {
         var k = event.key;
         if (event.key == 'p') {
-            window.paused = !paused;
+            window.paused = !window.paused;
         } else if ('1234567'.includes(k)) {
             blocks = loadLevel(game, Number(k))
         }
@@ -36,107 +36,18 @@ var enableDebugMode = function (game, enabled) {
 var __main = function () {
 
     var images = {
-        ball: '/static/images/ball.png',
-        block: '/static/images/block.jpg',
-        paddle: '/static/images/paddle.png',
+        ball: '/static/img/ball.png',
+        block: '/static/img/block.jpg',
+        paddle: '/static/img/paddle.png',
     };
-    var game = Game(60, images, function () {
-        var paddle = Paddle(game);
-        var ball = Ball(game);
-
-        var score = 0;
 
 
-        blocks = loadLevel(game, 1);
-
-        paused = false;
-
-        enableDebugMode(game, true);
-
-        game.registerAction('a', function () {
-            paddle.moveLeft()
-        });
-        game.registerAction('d', function () {
-            paddle.moveRight();
-        });
-        game.registerAction('f', function () {
-            ball.fire();
-        });
-
-
-        game.update = function () {
-            if (paused) {
-                return
-            }
-            ball.move();
-
-            if (paddle.collide(ball)) {
-                ball.rebound()
-            }
-
-            for (var i = 0; i < blocks.length; i++) {
-                var block = blocks[i];
-                if (block.collide(ball)) {
-                    log('block ');
-                    block.kill();
-                    ball.rebound();
-                    score += 100;
-                }
-            }
-        };
-
-        var enableDrag = false;
-        game.canvas.addEventListener('mousedown', function (event) {
-            var x = event.offsetX;
-            var y = event.offsetY;
-            log('down')
-            if (ball.hasPoint(x, y)) {
-                // Set drag status
-                enableDrag = true;
-            }
-        });
-
-        game.canvas.addEventListener('mousemove', function (event) {
-            var x = event.offsetX;
-            var y = event.offsetY;
-            log('move');
-            if(enableDrag) {
-                ball.x = x;
-                ball.y = y;
-            }
-        });
-
-        game.canvas.addEventListener('mouseup', function (event) {
-            var x = event.offsetX;
-            var y = event.offsetY;
-            log('up');
-            enableDrag = false;
-        });
-
-        game.draw = function () {
-            // Draw background
-            game.context.fillStyle = "gray";
-            game.context.fillRect(0, 0, 400, 300);
-
-            game.drawImage(paddle);
-            game.drawImage(ball);
-
-            for (var i = 0; i < blocks.length; i++) {
-                var block = blocks[i];
-                if (block.alive) {
-                    // log(block);
-                    game.drawImage(block);
-                }
-            }
-
-            game.context.fillStyle = "black";
-            game.context.fillText('分数：' + score, 10, 290);
-        };
-
-
-
+    var game = Game(60, images, function (g) {
+        var s = Scene(g);
+        g.runWithScene(s)
     });
 
+    enableDebugMode(game, true);
 
 };
 

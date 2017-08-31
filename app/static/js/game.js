@@ -1,6 +1,7 @@
 var Game = function (fps, images, runCallback) {
-    // images is a object, include images names
+    // img is a object, include img names
     var g = {
+        scene: null,
         actions: {},
         keydowns: [],
         images: {},
@@ -21,6 +22,14 @@ var Game = function (fps, images, runCallback) {
     window.addEventListener('keyup', function (event) {
         g.keydowns[event.key] = false;
     });
+
+    g.update = function (){
+        g.scene.update();
+    };
+
+    g.draw = function () {
+        g.scene.draw()
+    };
 
     g.registerAction = function (key, callback) {
         g.actions[key] = callback;
@@ -46,7 +55,7 @@ var Game = function (fps, images, runCallback) {
     };
 
     var loads = [];
-    // Load images
+    // Load img
     var names = Object.keys(images);
     for (var i = 0; i < names.length; i++) {
         let name = names[i];
@@ -56,11 +65,11 @@ var Game = function (fps, images, runCallback) {
         log(img, name);
         img.onload = function () {
             g.images[name] = img;
-            // Game run until All images loaded
+            // Game run until All img loaded
             loads.push(1);
             log('load image');
             if (loads.length == names.length) {
-                g.run();
+                g.__start();
             }
         }
     }
@@ -73,13 +82,22 @@ var Game = function (fps, images, runCallback) {
             image: img,
         };
         return image;
-    }
+    };
 
-    g.run = function () {
-        runCallback(g);
+    g.runWithScene = function (scene) {
+        g.scene = scene;
         setTimeout(function () {
             runloop()
         }, 1000 / window.fps);
+
+    };
+
+    g.replaceScene = function (scene) {
+        g.scene = scene;
+    };
+
+    g.__start = function (scene) {
+        runCallback(g);
     };
 
 

@@ -1,7 +1,7 @@
 var Block = function (game, position) {
     // position : [0, 0]
     var p = position;
-    // var image = imageFromPath("/static/images/block.jpg");
+    // var image = imageFromPath("/static/img/block.jpg");
     // var o = {
     //     image: image,
     //     x: p[0],

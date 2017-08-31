@@ -1,5 +1,5 @@
 var Ball = function (game) {
-    // var image = imageFromPath("/static/images/ball.png");
+    // var image = imageFromPath("/static/img/ball.png");
     // var o = {
     //     image: image,
     //     x: 100,
