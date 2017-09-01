@@ -43,7 +43,7 @@ var __main = function () {
 
 
     var game = Game(60, images, function (g) {
-        var s = SceneTitle(g);
+        var s = new SceneTitle(g);
         g.runWithScene(s)
     });
 
