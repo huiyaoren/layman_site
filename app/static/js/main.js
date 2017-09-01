@@ -42,7 +42,7 @@ var __main = function () {
     };
 
 
-    var game = Game(60, images, function (g) {
+    var game = Game.instance(60, images, function (g) {
         var s = SceneTitle.new(g);
         g.runWithScene(s)
     });
