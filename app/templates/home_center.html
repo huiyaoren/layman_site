@@ -19,7 +19,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            height: 99vh;
+            height: 100vh;
         }
 
         .bb {
@@ -32,9 +32,8 @@
             flex-grow: 1;
             flex-shrink: 1;
             flex-basis: auto;
-            height: 50%;
             width: 200px;
-            display: flex;
+            height: 100%;
             justify-content: center;
             align-items: center;
         }
@@ -52,13 +51,17 @@
     <script src="{{ url_for('static', filename='js/utils.js')}}"></script>
 </head>
 <body>
-<div class="container">
-    <div class="00 block">
-        <h1 class="time">11:30</h1>
+<div class="container" style="width: 100vw;height: 100vh">
+    <div class="0" style="width: 100vw;height: 50vh;display: flex">
+        <div class="00 block">
+            <h1 class="time">11:30</h1>
+            <p>123324242</p>
+        </div>
+        <div class="01 block">2</div>
     </div>
-    <div class="01 block">2</div>
-    <div class="10 block">3</div>
-    <div class="11 block">
+    <div class="1" style="width: 100vw;height: 50vh;display: flex">
+        <div class="10 block">3</div>
+        <div class="11 block">
         <div class="left">
             <ul class="">
                 <li>todo list 1</li>
@@ -84,6 +87,9 @@
         </div>
 
     </div>
+    </div>
+
+
 </div>
 </body>
 
