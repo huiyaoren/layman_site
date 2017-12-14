@@ -1,6 +1,7 @@
 from flask import render_template
 
 from . import main
+from app.home_center import weatherParser, goldParser
 
 @main.route('/')
 def index():
@@ -9,4 +10,6 @@ def index():
 @main.route('/home_center')
 @main.route('/homecenter')
 def home_center():
-    return render_template('home_center.html')
+    weather = weatherParser.data
+    gold = goldParser.data
+    return render_template('home_center.html', **locals())

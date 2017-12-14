@@ -19,7 +19,8 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            width: 100vw;
+            height: 100vh
         }
 
         .bb {
@@ -44,45 +45,40 @@
 
         .left, .right {
             display: flex;
-            width: 200px;
+            width: 400px;
             flex: 1;
+        }
+        .row {
+            width: 100vw;
+            height: 50vh;
+            display: flex;
         }
     </style>
     <script src="{{ url_for('static', filename='js/utils.js')}}"></script>
 </head>
 <body>
-<div class="container" style="width: 100vw;height: 100vh">
-    <div class="0" style="width: 100vw;height: 50vh;display: flex">
+<div class="container" style="">
+    <div class="0 row">
         <div class="00 block">
             <h1 class="time">11:30</h1>
-            <p>123324242</p>
         </div>
         <div class="01 block">2</div>
     </div>
-    <div class="1" style="width: 100vw;height: 50vh;display: flex">
+    <div class="1 row">
         <div class="10 block">3</div>
         <div class="11 block">
         <div class="left">
             <ul class="">
-                <li>todo list 1</li>
-                <li>todo list 2</li>
-                <li>todo list 3</li>
-                <li>todo list 4</li>
-                <li>todo list 5</li>
-                <li>todo list 6</li>
-                <li>todo list 7</li>
+                {% for item in weather.items() %}
+                    <li>{{ item[0] }}: {{ item[1] }}</li>
+                {% endfor %}
             </ul>
         </div>
         <div class="right">
-
             <ul class="">
-                <li>todo list 1</li>
-                <li>todo list 2</li>
-                <li>todo list 3</li>
-                <li>todo list 4</li>
-                <li>todo list 5</li>
-                <li>todo list 6</li>
-                <li>todo list 7</li>
+                {% for item in gold.items() %}
+                    <li>{{ item[0] }}: {{ item[1] }}</li>
+                {% endfor %}
             </ul>
         </div>
 
