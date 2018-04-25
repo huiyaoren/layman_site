@@ -25,6 +25,9 @@ class Parser():
         self.parse()
         self.after_parse()
 
+    def parse(self):
+        pass
+
     def after_parse(self):
         pass
 
