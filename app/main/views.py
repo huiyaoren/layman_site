@@ -1,7 +1,7 @@
 from flask import render_template
 
 from . import main
-from app.home_center import weatherParser, goldParser, bitcoinParser
+from app.parsers import weatherParser, goldParser, bitcoinParser
 
 @main.route('/')
 def index():
