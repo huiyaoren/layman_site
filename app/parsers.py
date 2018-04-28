@@ -80,7 +80,7 @@ class Gold(HtmlParser):
     def set_config(self):
         self.url = 'http://www.icbc.com.cn/ICBCDynamicSite/Charts/GoldTendencyPicture.aspx'
         self.patterns = {
-            '账户黄金(美元)': '//*[@id="TABLE1"]/tbody/tr[2]/td[5]/text()',
+            '账户黄金(人民币)': '//*[@id="TABLE1"]/tbody/tr[2]/td[5]/text()',
         }
 
 
