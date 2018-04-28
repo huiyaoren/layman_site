@@ -12,6 +12,12 @@
             list-style: none;
             justify-content: center;
             align-items: center;
+            color: white;
+        }
+
+        body {
+            background: black;
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
         }
 
         .container {
@@ -48,49 +54,134 @@
             width: 400px;
             flex: 1;
         }
+
         .row {
             width: 100vw;
             height: 50vh;
             display: flex;
         }
+
     </style>
-    <script src="{{ url_for('static', filename='js/utils.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='layui/css/layui.css') }}">
 </head>
 <body>
-<div class="container" style="">
-    <div class="0 row">
-        <div class="00 block">
-            <h1 class="time">11:30</h1>
-        </div>
-        <div class="01 block">2</div>
-    </div>
-    <div class="1 row">
-        <div class="10 block">3</div>
-        <div class="11 block">
-        <div class="left">
-            <ul class="">
-                {% for item in weather.items() %}
-                    <li>{{ item[0] }}: {{ item[1] }}</li>
-                {% endfor %}
+{#<div class="container" style="">#}
+{#    <div class="0 row">#}
+{#        <div class="00 block">#}
+{#            <h1 class="time">11:30</h1>#}
+{#            <a href="{{ url_for('main.home_center') }}">sdfasd</a>#}
+{##}
+{#        </div>#}
+{#        <div class="01 block">2</div>#}
+{#    </div>#}
+{#    <div class="1 row">#}
+{#        <div class="10 block">3</div>#}
+{#        <div class="11 block">#}
+{#            <div class="left">#}
+{#                <ul class="">#}
+{#                    {% for item in weather.items() %}#}
+{#                        <li>{{ item[0] }}: {{ item[1] }}</li>#}
+{#                    {% endfor %}#}
+{#                    {% for item in gold.items() %}#}
+{#                        <li>{{ item[0] }}: {{ item[1] }}</li>#}
+{#                    {% endfor %}#}
+{#                    {% for item in bitcoin.items() %}#}
+{#                        <li>{{ item[0] }}: {{ item[1] }}</li>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="right">#}
+{#                <ul class="">#}
+{##}
+{#                </ul>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+
+
+<div class="layui-row">
+    <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+        <div id="data_day" style="font-size: 1.5rem"></div>
+        <div id="data_time" style="font-size: 7rem"></div>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="">BTC(人民币)</li>
+                <li class="">账户黄金(人民币)</li>
             </ul>
+            <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-item">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
+                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item layui-show">内容5</div>
+            </div>
         </div>
-        <div class="right">
-            <ul class="">
-                {% for item in gold.items() %}
-                    <li>{{ item[0] }}: {{ item[1] }}</li>
-                {% endfor %}
-                {% for item in bitcoin.items() %}
-                    <li>{{ item[0] }}: {{ item[1] }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
     </div>
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4" style="text-align: right">
+        2
     </div>
-
-
 </div>
 </body>
+<script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
+<script src="{{ url_for('static', filename='js/home/common.js') }}"></script>
+<script>
 
-<script></script>
+    layui.use(['element']);
+
+    class HomeView extends View {
+
+        getDay() {
+            let time = new Date();
+            let year = time.getYear();
+            let month = time.getMonth();
+            let date = time.getDate();
+            let day = time.getDay();
+            let weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][day];
+            year = Number(year) + 1900;
+            month = Number(month) + 1;
+            month < 10 ? month = '0' + month : month;
+            qs('#data_day').innerHTML = '[ ' + weekday + ' ]' + '  ' + year + ' 年 ' + month + ' 月 ' + date + ' 日 ';
+        }
+
+        getTime() {
+            let time = new Date();
+            let hour = time.getHours();
+            let minutes = time.getMinutes();
+            let second = time.getSeconds();
+            hour < 10 ? hour = '0' + hour : hour;
+            minutes < 10 ? minutes = '0' + minutes : minutes;
+            second < 10 ? second = '0' + second : second;
+            qs('#data_time').innerHTML = hour + ':' + minutes;
+        }
+
+        getWeather() {
+            this._fetchWith('home/weather', {
+                'method': 'GET'
+            }, result => {
+                log(result);
+            })
+        }
+
+        getBitcoin() {
+            this._fetchWith('home/bitcoin', {
+                'method': 'GET'
+            }, result => {
+                log(result);
+            })
+        }
+
+        getGold() {
+            this._fetchWith('home/gold', {
+                'method': 'GET'
+            }, result => {
+                log(result);
+            })
+        }
+    }
+
+    let home = new HomeView();
+    home.getDay();
+    home.getTime();
+</script>
 </html>
