@@ -274,7 +274,7 @@ function fetchBase(url, init, successBack, errorBack) {
 
     /* 设置请求头部 */
     let myHeaders = new Headers();
-    myHeaders.append('X-CSRF-TOKEN', CT.TOKEN);
+    // myHeaders.append('X-CSRF-TOKEN', CT.TOKEN);
     if (init.form) {
     } else {
         myHeaders.append('Accept', 'application/json');
@@ -292,7 +292,8 @@ function fetchBase(url, init, successBack, errorBack) {
         init.body = init.form;
     }
 
-    fetch(CT.DOMAIN + url, init).then(function (response) {
+    // fetch(CT.DOMAIN + url, init).then(function (response) {
+    fetch(url, init).then(function (response) {
         typeof layer !== 'undefined' && layer.closeAll('loading');
         return response.text()
     }).then(function (result) {
