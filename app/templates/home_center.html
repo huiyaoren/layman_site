@@ -131,7 +131,7 @@
 
     class HomeView extends View {
 
-        getDay() {
+        async getDay() {
             let time = new Date();
             let year = time.getYear();
             let month = time.getMonth();
@@ -144,7 +144,7 @@
             qs('#data_day').innerHTML = '[ ' + weekday + ' ]' + '  ' + year + ' 年 ' + month + ' 月 ' + date + ' 日 ';
         }
 
-        getTime() {
+        async getTime() {
             let time = new Date();
             let hour = time.getHours();
             let minutes = time.getMinutes();
@@ -155,33 +155,43 @@
             qs('#data_time').innerHTML = hour + ':' + minutes;
         }
 
-        getWeather() {
-            this._fetchWith('home/weather', {
+        async getWeather() {
+            this._fetchWith('{{ url_for('main.home_data', name='weather', _external=True) }}', {
                 'method': 'GET'
             }, result => {
+                result = JSON.parse(result);
                 log(result);
             })
         }
 
-        getBitcoin() {
-            this._fetchWith('home/bitcoin', {
+        async getBitcoin() {
+            this._fetchWith('{{ url_for('main.home_data', name='bitcoin', _external=True) }}', {
                 'method': 'GET'
             }, result => {
+                result = JSON.parse(result);
                 log(result);
             })
         }
 
-        getGold() {
-            this._fetchWith('home/gold', {
+        async getGold() {
+            this._fetchWith('{{ url_for('main.home_data', name='gold', _external=True) }}', {
                 'method': 'GET'
             }, result => {
+                result = JSON.parse(result);
                 log(result);
             })
         }
     }
 
     let home = new HomeView();
+    let t = new Date();
+    log(t);
     home.getDay();
     home.getTime();
+    home.getGold();
+    home.getBitcoin();
+    home.getWeather();
+    let t1 = new Date();
+    log(t1 - t);
 </script>
 </html>
