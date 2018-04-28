@@ -41,7 +41,7 @@ class HtmlParser(Parser):
     def items_in_html(self, html, xpath_pattern):
         html = etree.HTML(html, parser=self.xml_parser)
         result = html.xpath(xpath_pattern)
-        return result[0] if len(result) == 1 else result
+        return result[0].strip() if len(result) == 1 else result
 
     def parse(self):
         patterns = self.patterns
@@ -55,7 +55,7 @@ class JsonParser(HtmlParser):
         result = json
         for k in keys:
             result = result[k]
-        return result
+        return result.strip()
 
     def parse(self):
         patterns = self.patterns
