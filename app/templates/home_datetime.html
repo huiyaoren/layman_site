@@ -1,0 +1,31 @@
+<div id="data_day" style="font-size: 1.5rem"></div>
+<div id="data_time" style="font-size: 7rem"></div>
+
+<script>
+    async function getDay() {
+        let time = new Date();
+        let year = time.getYear();
+        let month = time.getMonth();
+        let date = time.getDate();
+        let day = time.getDay();
+        let weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][day];
+        year = Number(year) + 1900;
+        month = Number(month) + 1;
+        month < 10 ? month = '0' + month : month;
+        qs('#data_day').innerHTML = '[ ' + weekday + ' ]' + '  ' + year + ' 年 ' + month + ' 月 ' + date + ' 日 ';
+    }
+
+    async function getTime() {
+        let time = new Date();
+        let hour = time.getHours();
+        let minutes = time.getMinutes();
+        let second = time.getSeconds();
+        hour < 10 ? hour = '0' + hour : hour;
+        minutes < 10 ? minutes = '0' + minutes : minutes;
+        second < 10 ? second = '0' + second : second;
+        qs('#data_time').innerHTML = hour + ':' + minutes;
+    }
+
+    HomeView.prototype.getDay = getDay.bind(home);
+    HomeView.prototype.getTime = getTime.bind(home);
+</script>
