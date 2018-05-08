@@ -1,0 +1,13 @@
+<script>
+    async function getWeather() {
+        this._fetchWith('{{ url_for('main.home_data', name='weather', _external=True) }}', {
+            'method': 'GET'
+        }, result => {
+            result = JSON.parse(result);
+            log(result);
+        })
+    }
+
+    HomeView.prototype.getWeather = getWeather.bind(home);
+
+</script>
