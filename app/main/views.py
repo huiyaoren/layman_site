@@ -1,4 +1,5 @@
 import json
+import sys
 
 from flask import render_template, current_app
 
@@ -35,8 +36,17 @@ def home_data(name):
 
 @main.route('/test')
 def btc_balance():
-    import sys
     sys.path.append(current_app.config['ADDITIONAL_PATH'])
     import virtual_coin
-    print(virtual_coin.balance)
-    return ''
+    virtual_coin.current_market = {
+        'BCH': 8459,
+        'XRP': 4.42,
+        'BTM': 4.20,
+        'EOS': 81.79,
+        'ADA': 1.60,
+        'BTC': 54241.18,
+        'ETC': 115.18,
+        'ETH': 4509.62,
+        'IOST': 0.35,
+    }
+    return json.dumps(virtual_coin.main())
