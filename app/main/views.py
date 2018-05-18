@@ -1,6 +1,6 @@
 import json
 
-from flask import render_template
+from flask import render_template, current_app
 
 from . import main
 from app.parsers import weatherParser, goldParser, bitcoinParser
@@ -31,3 +31,12 @@ def home_data(name):
     else:
         data = {}
     return json.dumps(data)
+
+
+@main.route('/test')
+def btc_balance():
+    import sys
+    sys.path.append(current_app.config['ADDITIONAL_PATH'])
+    import virtual_coin
+    print(virtual_coin.balance)
+    return ''
