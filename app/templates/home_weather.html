@@ -1,3 +1,48 @@
+<style>
+    .layui-table td, .layui-table th {
+        padding: 3px 2px;
+    }
+</style>
+
+<i class="iconfont icon-sun" style="font-size: 5rem"></i>
+<span style="font-size: 2rem">/</span>
+<i class="iconfont icon-cloudy" style="font-size: 5rem"></i>
+&nbsp;&nbsp;&nbsp;
+<span style="font-size: 4rem" id="val_tem"></span>
+
+<br>
+<div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
+    <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+        <tbody>
+        <tr style="background-color:rgba(0,0,0,0)">
+            <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
+            <td><span id="val_hud" style="font-size: 1.1rem">21%</span></td>
+            <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
+            <td><span id="val_sun_on" style="font-size: 1.1rem">21</span></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="background-color:rgba(0,0,0,0)">
+            <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
+            <td><span id="val_uv" style="font-size: 1.1rem">21</span></td>
+            <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
+            <td><span id="val_sun_off" style="font-size: 1.1rem">21</span></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="background-color:rgba(0,0,0,0)">
+            <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
+            <td><span id="val_press" style="font-size: 1.1rem">21</span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>09:00:55 更新</div>
+</div>
+
 <script>
     async function getWeather() {
         this._fetchWith('{{ url_for('main.home_data', name='weather', _external=True) }}', {
@@ -5,9 +50,17 @@
         }, result => {
             result = JSON.parse(result);
             log(result);
+            {#            qs('#val_weather').innerHTML = result['天气'];#}
+            qs('#val_tem').innerHTML = result['实时气温'];
+            qs('#val_sun_on').innerHTML = result['日出时间'];
+            qs('#val_sun_off').innerHTML = result['日落时间'];
+            qs('#val_press').innerHTML = result['气压'];
+            {#            qs('#val_tem_r').innerHTML = result['气温'];#}
+            qs('#val_hud').innerHTML = result['湿度'];
+            qs('#val_uv').innerHTML = result['紫外线'];
+            {#            qs('#val_wind').innerHTML = result['风级'];#}
         })
     }
 
     HomeView.prototype.getWeather = getWeather.bind(home);
-
 </script>
