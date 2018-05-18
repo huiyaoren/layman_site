@@ -9,6 +9,7 @@ class Config:
         pass
 
 class DefaultConfig(Config):
+    ADDITIONAL_PATH = r'/host/Project/scripts'
     pass
 
 config = {
