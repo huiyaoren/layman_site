@@ -12,61 +12,103 @@
     }
 </style>
 
-<i class="iconfont icon-sun" style="font-size: 5rem"></i>
-<span style="font-size: 2rem">/</span>
-<i class="iconfont icon-cloudy" style="font-size: 5rem"></i>
+<i class="iconfont weather_1" style="font-size: 5rem"></i>
+<span class="weather_or" style="font-size: 2rem"></span>
+<i class="iconfont weather_2" style="font-size: 5rem"></i>
 &nbsp;&nbsp;&nbsp;
-<span style="font-size: 4rem" id="val_tem"></span>
+<span style="font-size: 2rem" id="val_tem_r"></span>
 
 <br>
+<span style="font-size: 3rem" id="val_tem"></span>
+&nbsp;&nbsp;&nbsp;
+<span id="val_time">09:00:55 更新</span>
+
 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
     <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
         <tbody>
         <tr>
             <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
-            <td><span id="val_hud" style="font-size: 1.1rem">21%</span></td>
+            <td><span id="val_hud" style="font-size: 1.1rem"></span></td>
             <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
-            <td><span id="val_sun_on" style="font-size: 1.1rem">21</span></td>
+            <td><span id="val_sun_on" style="font-size: 1.1rem"></span></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
-            <td><span id="val_uv" style="font-size: 1.1rem">21</span></td>
+            <td><span id="val_uv" style="font-size: 1.1rem"></span></td>
             <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
-            <td><span id="val_sun_off" style="font-size: 1.1rem">21</span></td>
+            <td><span id="val_sun_off" style="font-size: 1.1rem"></span></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
-            <td><span id="val_press" style="font-size: 1.1rem">21</span></td>
-            <td></td>
-            <td></td>
+            <td><span id="val_press" style="font-size: 1.1rem"></span></td>
+            <td><i class="wind iconfont icon-wind-1" style="font-size: 2rem"></i></td>
+            <td><span id="val_wind" style="font-size: 1.1rem"></span></td>
             <td></td>
             <td></td>
         </tr>
         </tbody>
     </table>
-    <div>09:00:55 更新</div>
 </div>
 
 <script>
+    weather_list = {
+        '晴': 'icon-sun',
+        '多云': 'icon-cloudy',
+        '阴': 'icon-overcast',
+        '小雨': 'icon-rain-1',
+        '中雨': 'icon-rain-2',
+        '大雨': 'icon-rain-3',
+        '阵雨': 'icon-rain-thunder',
+        '雷阵雨': 'icon-rain-thunder',
+        '暴雨': 'icon-rain-4',
+        '小雪': 'icon-snow-1',
+        '中雪': 'icon-snow-2',
+        '大雪': 'icon-rain-snow',
+    };
+
     async function getWeather() {
         this._fetchWith('{{ url_for('main.home_data', name='weather', _external=True) }}', {
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
             log(result);
-            {#            qs('#val_weather').innerHTML = result['天气'];#}
+
             qs('#val_tem').innerHTML = result['实时气温'];
             qs('#val_sun_on').innerHTML = result['日出时间'];
             qs('#val_sun_off').innerHTML = result['日落时间'];
             qs('#val_press').innerHTML = result['气压'];
-            {#            qs('#val_tem_r').innerHTML = result['气温'];#}
+            qs('#val_tem_r').innerHTML = result['气温'];
             qs('#val_hud').innerHTML = result['湿度'];
             qs('#val_uv').innerHTML = result['紫外线'];
-            {#            qs('#val_wind').innerHTML = result['风级'];#}
+            qs('#val_wind').innerHTML = result['风级'];
+
+            wind = result['风级'].replace(/[^0-9]/ig, "");
+            if (wind = 1) {
+                qs('.wind').setAttribute('class', 'iconfont icon-wind-1');
+            } else if (wind = 2) {
+                qs('.wind').setAttribute('class', 'iconfont icon-wind-2');
+            } else if (wind >= 3) {
+                qs('.wind').setAttribute('class', 'iconfont icon-wind-3');
+            }
+
+            weather = result['天气'].split('转');
+            qs('.weather_1').setAttribute('class', 'iconfont weather_1 ' + weather_list[weather[0]] || '.icon-undefined');
+            if (weather.length = 1) {
+                qs('.weather_or').innerHTML = '';
+            } else if (weather.length = 2) {
+                qs('.weather_or').innerHTML = '/';
+                qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
+            }
+
+            let time = new Date();
+            let hour = time.getHours();
+            let minutes = time.getMinutes();
+            let second = time.getSeconds();
+            qs('#val_time').innerHTML = hour + ':' + minutes + ':' + second + ' 更新';
         })
     }
 
