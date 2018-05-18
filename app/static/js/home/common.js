@@ -246,13 +246,11 @@ function fetchList(url, form, method, selector, successBack, errorBack) {
 
 //log(layer);
 function fetchWith(url, init, successBack, errorBack) {
-    layui.use('layer', function () {
-        let layer = layui.layer;
-        layer.load(0);
-
-        log(layui.layer);
+    //layui.use('layer', function () {
+        // let layer = layui.layer;
+        // layer.load(0);
         fetchBase(url, init, successBack, errorBack)
-    })
+    //})
 }
 
 function fetchBase(url, init, successBack, errorBack) {
