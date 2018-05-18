@@ -2,6 +2,14 @@
     .layui-table td, .layui-table th {
         padding: 3px 2px;
     }
+
+    .layui-table tr {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .layui-table tbody tr:hover, .layui-table thead tr, .layui-table[lay-even] tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0);
+    }
 </style>
 
 <i class="iconfont icon-sun" style="font-size: 5rem"></i>
@@ -14,7 +22,7 @@
 <div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
     <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
         <tbody>
-        <tr style="background-color:rgba(0,0,0,0)">
+        <tr>
             <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
             <td><span id="val_hud" style="font-size: 1.1rem">21%</span></td>
             <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
@@ -22,7 +30,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr style="background-color:rgba(0,0,0,0)">
+        <tr>
             <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
             <td><span id="val_uv" style="font-size: 1.1rem">21</span></td>
             <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
@@ -30,7 +38,7 @@
             <td></td>
             <td></td>
         </tr>
-        <tr style="background-color:rgba(0,0,0,0)">
+        <tr>
             <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
             <td><span id="val_press" style="font-size: 1.1rem">21</span></td>
             <td></td>
