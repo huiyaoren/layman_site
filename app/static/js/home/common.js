@@ -214,15 +214,15 @@ function clean_cache() {
 /* 默认 false，请勿改动！ */
 window.debug = true;
 
-log = (...n) => {
+let log = (...n) => {
     if (window.debug) {
         console.log(...n);
     }
     return null;
 };
 
-qs = sel => document.querySelector(sel);
-qsa = sel => document.querySelectorAll(sel);
+let qs = sel => document.querySelector(sel);
+let qsa = sel => document.querySelectorAll(sel);
 
 function fetchList(url, form, method, selector, successBack, errorBack) {
     let myInit = {

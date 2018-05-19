@@ -1,6 +1,6 @@
-<script>
+<script type="text/babel">
     async function getBitcoin() {
-        this._fetchWith('{{ url_for('main.home_data', name='bitcoin', _external=True) }}', {
+        this._fetchWith("{{ url_for('main.home_data', name='bitcoin', _external=True) }}", {
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);

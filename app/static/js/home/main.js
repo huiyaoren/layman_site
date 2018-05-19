@@ -1,11 +1,5 @@
 class HomeView extends View {}
 
-function main() {
-    layui.use(['element']);
+layui.use(['element']);
 
-    home = new HomeView();
-
-
-}
-
-main();
+let home = new HomeView();

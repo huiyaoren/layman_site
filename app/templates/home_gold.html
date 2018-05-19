@@ -1,6 +1,6 @@
-<script>
+<script type="text/babel">
     async function getGold() {
-        this._fetchWith('{{ url_for('main.home_data', name='gold', _external=True) }}', {
+        this._fetchWith("{{ url_for('main.home_data', name='gold', _external=True) }}", {
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
