@@ -2,7 +2,7 @@
 <div id="data_time" style="font-size: 7rem"></div>
 
 <script>
-    async function getDay() {
+     function getDay() {
         let time = new Date();
         let year = time.getYear();
         let month = time.getMonth();
@@ -15,7 +15,7 @@
         qs('#data_day').innerHTML = '[ ' + weekday + ' ]' + '  ' + year + ' 年 ' + month + ' 月 ' + date + ' 日 ';
     }
 
-    async function getTime() {
+     function getTime() {
         let time = new Date();
         let hour = time.getHours();
         let minutes = time.getMinutes();
@@ -25,7 +25,4 @@
         second < 10 ? second = '0' + second : second;
         qs('#data_time').innerHTML = hour + ':' + minutes;
     }
-
-    HomeView.prototype.getDay = getDay.bind(home);
-    HomeView.prototype.getTime = getTime.bind(home);
 </script>

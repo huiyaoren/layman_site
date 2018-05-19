@@ -1,5 +1,18 @@
-class HomeView extends View {}
+class HomeView extends View {
+}
 
 layui.use(['element']);
 
 let home = new HomeView();
+
+HomeView.prototype.getWeather = getWeather.bind(home);
+HomeView.prototype.getDay = getDay.bind(home);
+HomeView.prototype.getTime = getTime.bind(home);
+HomeView.prototype.getBitcoin = getBitcoin.bind(home);
+HomeView.prototype.getGold = getGold.bind(home);
+
+home.getDay();
+home.getTime();
+home.getGold();
+home.getBitcoin();
+home.getWeather();
