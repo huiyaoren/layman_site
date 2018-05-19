@@ -14,9 +14,9 @@
 
 <i class="iconfont weather_1" style="font-size: 5rem"></i>
 <span class="weather_or" style="font-size: 2rem"></span>
-<i class="iconfont weather_2" style="font-size: 5rem"></i>
+<i class="iconfont weather_2" style="font-size: 2.5rem"></i>
 &nbsp;&nbsp;&nbsp;
-<span style="font-size: 2rem" id="val_tem_r"></span>
+<span style="font-size: 2.5rem" id="val_tem_r"></span>
 
 <br>
 <span style="font-size: 3rem" id="val_tem"></span>
@@ -97,9 +97,9 @@
 
             weather = result['天气'].split('转');
             qs('.weather_1').setAttribute('class', 'iconfont weather_1 ' + weather_list[weather[0]] || '.icon-undefined');
-            if (weather.length = 1) {
+            if (weather.length == 1) {
                 qs('.weather_or').innerHTML = '';
-            } else if (weather.length = 2) {
+            } else if (weather.length == 2) {
                 qs('.weather_or').innerHTML = '/';
                 qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
             }
