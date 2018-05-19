@@ -54,8 +54,8 @@
     </table>
 </div>
 
-<script>
-    weather_list = {
+<script type="text/babel">
+    let weather_list = {
         '晴': 'icon-sun',
         '多云': 'icon-cloudy',
         '阴': 'icon-overcast',
@@ -71,7 +71,7 @@
     };
 
     async function getWeather() {
-        this._fetchWith('{{ url_for('main.home_data', name='weather', _external=True) }}', {
+        this._fetchWith("{{ url_for('main.home_data', name='weather', _external=True) }}", {
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
@@ -86,7 +86,7 @@
             qs('#val_uv').innerHTML = result['紫外线'];
             qs('#val_wind').innerHTML = result['风级'];
 
-            wind = result['风级'].replace(/[^0-9]/ig, "");
+            let wind = result['风级'].replace(/[^0-9]/ig, "");
             if (wind = 1) {
                 qs('.wind').setAttribute('class', 'iconfont icon-wind-1');
             } else if (wind = 2) {
@@ -95,11 +95,11 @@
                 qs('.wind').setAttribute('class', 'iconfont icon-wind-3');
             }
 
-            weather = result['天气'].split('转');
+            let weather = result['天气'].split('转');
             qs('.weather_1').setAttribute('class', 'iconfont weather_1 ' + weather_list[weather[0]] || '.icon-undefined');
-            if (weather.length == 1) {
+            if (weather.length === 1) {
                 qs('.weather_or').innerHTML = '';
-            } else if (weather.length == 2) {
+            } else if (weather.length === 2) {
                 qs('.weather_or').innerHTML = '/';
                 qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
             }

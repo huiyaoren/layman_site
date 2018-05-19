@@ -65,6 +65,7 @@
             display: flex;
         }
     </style>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
     <script src="{{ url_for('static', filename='js/home/common.js') }}"></script>
     <script src="{{ url_for('static', filename='js/home/main.js') }}"></script>
@@ -95,7 +96,7 @@
     </div>
 </div>
 </body>
-<script>
+<script type="text/babel">
     home.getDay();
     home.getTime();
     home.getGold();
