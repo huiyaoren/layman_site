@@ -87,6 +87,7 @@
             qs('#val_hud').innerHTML = result['湿度'];
             qs('#val_uv').innerHTML = result['紫外线'];
             qs('#val_wind').innerHTML = result['风级'];
+            qs('#val_time').innerHTML = result['发布时间'];
 
             let wind = result['风级'].replace(/[^0-9]/ig, "");
             if (wind === 1) {
@@ -105,8 +106,6 @@
                 qs('.weather_or').innerHTML = '/';
                 qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
             }
-
-            qs('#val_time').innerHTML = this.time + ' 更新';
 
             show('#weather_block');
         })

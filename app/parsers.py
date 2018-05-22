@@ -78,6 +78,7 @@ class Weather(HtmlParser):
             '紫外线': '//*[@id="weaLiveInfo"]/ul/li[7]/i/text()',
             '天气': '//*[@id="wrap"]/div[6]/div[2]/div[1]/div[3]/div/a/text()',
             '气温': '//*[@id="wrap"]/div[6]/div[2]/div[1]/div[3]/div/a/i/text()',
+            '发布时间': '//*[@id="wrap"]/div[6]/div[1]/div[2]/text()',
         }
 
 
