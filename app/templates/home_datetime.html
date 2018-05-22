@@ -24,5 +24,6 @@
         minutes < 10 ? minutes = '0' + minutes : minutes;
         second < 10 ? second = '0' + second : second;
         qs('#data_time').innerHTML = hour + ':' + minutes;
+        this.time = hour + ':' + minutes;
     }
 </script>

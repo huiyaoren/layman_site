@@ -247,9 +247,9 @@ function fetchList(url, form, method, selector, successBack, errorBack) {
 //log(layer);
 function fetchWith(url, init, successBack, errorBack) {
     //layui.use('layer', function () {
-        // let layer = layui.layer;
-        // layer.load(0);
-        fetchBase(url, init, successBack, errorBack)
+    // let layer = layui.layer;
+    // layer.load(0);
+    fetchBase(url, init, successBack, errorBack)
     //})
 }
 
@@ -301,9 +301,29 @@ function fetchBase(url, init, successBack, errorBack) {
             set_cache(key, result, init.cache)
         }
         successBack && successBack(result);
-    })
-    //     .catch(function (error) {
+    });
+    //     .catch(function (error) {W
     //     log('There has been a problem with your fetch operation: ' + error.message);
     //     errorBack && errorBack();
     // });
+}
+
+function hide(query, duration = 500, iterations = 1) {
+    qs(query).animate([
+        {opacity: '1'},
+        {opacity: '0'}
+    ], {
+        duration: duration,
+        iterations: iterations
+    });
+}
+
+function show(query, duration = 1000, iterations = 1) {
+    qs(query).animate([
+        {opacity: '0'},
+        {opacity: '1'}
+    ], {
+        duration: duration,
+        iterations: iterations
+    });
 }

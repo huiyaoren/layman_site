@@ -11,49 +11,49 @@
         background-color: rgba(0, 0, 0, 0);
     }
 </style>
+<div id="weather_block" style="transition:opacity 1s">
+    <i class="iconfont weather_1" style="font-size: 5rem"></i>
+    <span class="weather_or" style="font-size: 2rem"></span>
+    <i class="iconfont weather_2" style="font-size: 2.5rem"></i>
+    &nbsp;&nbsp;&nbsp;
+    <span style="font-size: 2.5rem" id="val_tem_r"></span>
 
-<i class="iconfont weather_1" style="font-size: 5rem"></i>
-<span class="weather_or" style="font-size: 2rem"></span>
-<i class="iconfont weather_2" style="font-size: 2.5rem"></i>
-&nbsp;&nbsp;&nbsp;
-<span style="font-size: 2.5rem" id="val_tem_r"></span>
+    <br>
+    <span style="font-size: 3rem" id="val_tem"></span>
+    &nbsp;&nbsp;&nbsp;
+    <span id="val_time">09:00:55 更新</span>
 
-<br>
-<span style="font-size: 3rem" id="val_tem"></span>
-&nbsp;&nbsp;&nbsp;
-<span id="val_time">09:00:55 更新</span>
-
-<div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
-    <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
-        <tbody>
-        <tr>
-            <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
-            <td><span id="val_hud" style="font-size: 1.1rem"></span></td>
-            <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
-            <td><span id="val_sun_on" style="font-size: 1.1rem"></span></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
-            <td><span id="val_uv" style="font-size: 1.1rem"></span></td>
-            <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
-            <td><span id="val_sun_off" style="font-size: 1.1rem"></span></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
-            <td><span id="val_press" style="font-size: 1.1rem"></span></td>
-            <td><i class="wind iconfont icon-wind-1" style="font-size: 2rem"></i></td>
-            <td><span id="val_wind" style="font-size: 1.1rem"></span></td>
-            <td></td>
-            <td></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
+        <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+            <tbody>
+            <tr>
+                <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
+                <td><span id="val_hud" style="font-size: 1.1rem"></span></td>
+                <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
+                <td><span id="val_sun_on" style="font-size: 1.1rem"></span></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
+                <td><span id="val_uv" style="font-size: 1.1rem"></span></td>
+                <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
+                <td><span id="val_sun_off" style="font-size: 1.1rem"></span></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
+                <td><span id="val_press" style="font-size: 1.1rem"></span></td>
+                <td><i class="wind iconfont icon-wind-1" style="font-size: 2rem"></i></td>
+                <td><span id="val_wind" style="font-size: 1.1rem"></span></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <script>
     let weather_list = {
         '晴': 'icon-sun',
@@ -76,6 +76,8 @@
         }, result => {
             result = JSON.parse(result);
             log(result);
+
+            hide('#weather_block');
 
             qs('#val_tem').innerHTML = result['实时气温'];
             qs('#val_sun_on').innerHTML = result['日出时间'];
@@ -104,11 +106,9 @@
                 qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
             }
 
-            let time = new Date();
-            let hour = time.getHours();
-            let minutes = time.getMinutes();
-            let second = time.getSeconds();
-            qs('#val_time').innerHTML = hour + ':' + minutes + ':' + second + ' 更新';
+            qs('#val_time').innerHTML = this.time + ' 更新';
+
+            show('#weather_block');
         })
     }
 </script>
