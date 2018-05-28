@@ -3,6 +3,8 @@ import json
 import requests
 from lxml import etree
 
+from app.time_recoder import log_time, log_time_with_name
+
 
 class Parser():
     def __init__(self):
@@ -107,7 +109,32 @@ class Bitcoin(JsonParser):
         del self.data['BTC 卖出价(人民币)']
 
 
+class BlockMarket(HtmlParser):
+    def set_config(self):
+        self.url = 'https://block.cc/'
+        self.patterns = {
+            '名称': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[2]/div/span/span/em[1]/text()',
+            '价格 (USD)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[3]/span/span/text()',
+            '涨幅 (24H)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[4]/span/span/text()',
+            '交易量': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[6]/span/text()',
+            '市值': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[7]/span/text()',
+        }
+
+    def after_parse(self):
+        result = {self.data['名称'][i].strip(): {
+            'name': self.data['名称'][i].strip(),
+            'price': self.data['价格 (USD)'][i].strip(),
+            'increase': self.data['涨幅 (24H)'][i].strip(),
+            'transaction': self.data['交易量'][i].strip(),
+            'market_value': self.data['市值'][i].strip(),
+        } for i in range(60)}
+        self.data = result
+
+
+@log_time_with_name('main')
 def main():
+    test = BlockMarket()
+    print(test['data'])
     pass
 
 
