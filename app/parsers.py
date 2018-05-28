@@ -118,6 +118,7 @@ class BlockMarket(HtmlParser):
             '涨幅 (24H)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[4]/span/span/text()',
             '交易量': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[6]/span/text()',
             '市值': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[7]/span/text()',
+            '图片': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[2]/div/span/img/@src',
         }
 
     def after_parse(self):
@@ -127,6 +128,7 @@ class BlockMarket(HtmlParser):
             'increase': self.data['涨幅 (24H)'][i].strip(),
             'transaction': self.data['交易量'][i].strip(),
             'market_value': self.data['市值'][i].strip(),
+            'icon': self.data['图片'][i].strip(),
         } for i in range(60)}
         self.data = result
 
