@@ -12,17 +12,20 @@
     }
 </style>
 <div id="weather_block" style="transition:opacity 1s">
+    {# line 1 #}
     <i class="iconfont weather_1" style="font-size: 5rem"></i>
     <span class="weather_or" style="font-size: 2rem"></span>
     <i class="iconfont weather_2" style="font-size: 2.5rem"></i>
-    &nbsp;&nbsp;&nbsp;
+    <span id="val_weather" style="font-size: 1rem"></span>
     <span style="font-size: 2.5rem" id="val_tem_r"></span>
-
     <br>
+
+    {# line 2 #}
     <span style="font-size: 3rem" id="val_tem"></span>
     &nbsp;&nbsp;&nbsp;
     <span id="val_time">09:00:55 更新</span>
 
+    {# line 3 #}
     <div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
         <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
             <tbody>
@@ -88,6 +91,7 @@
             qs('#val_uv').innerHTML = result['紫外线'];
             qs('#val_wind').innerHTML = result['风级'];
             qs('#val_time').innerHTML = result['发布时间'];
+            qs('#val_weather').innerHTML = result['天气'];
 
             let wind = result['风级'].replace(/[^0-9]/ig, "");
             if (wind === 1) {
