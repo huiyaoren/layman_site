@@ -1,10 +1,22 @@
+<div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+    <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+        <tbody>
+        <tr>
+            <td>账户黄金(人民币):</td>
+            <td><span id="val_gold" style="font-size: 1.1rem"></span></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <script>
-     function getGold() {
+    function getGold() {
         this._fetchWith("{{ url_for('main.home_data', name='gold', _external=True) }}", {
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
-            log(result);
+            qs('#val_gold').innerHTML = result['账户黄金(人民币)']
         })
     }
 </script>

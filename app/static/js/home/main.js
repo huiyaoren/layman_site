@@ -17,6 +17,8 @@ home.getGold();
 home.getBitcoin();
 home.getWeather();
 
-setInterval(home.getDay, 10000);
-setInterval(home.getTime, 10000);
-setInterval(home.getWeather, 60000);
+setInterval(home.getDay, 10 * 1000);
+setInterval(home.getTime, 10 * 1000);
+setInterval(home.getWeather, 60 * 1000);
+setInterval(home.getGold, 100 * 1000);
+setInterval(home.getBitcoin, 80 * 1000);
