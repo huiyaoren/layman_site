@@ -1,3 +1,15 @@
+<table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+    <tr>
+        <th>货币名</th>
+        <th>持仓数量</th>
+        <th>持仓成本价格</th>
+        <th>当前价格</th>
+        <th>盈亏百分比</th>
+    </tr>
+    <tbody id="tbody_balance">
+    </tbody>
+</table>
+<span id="total_earned"></span>
 <script>
     function getMyBalance() {
         this._fetchWith("{{ url_for('main.home_data', name='my_balance', _external=True) }}", {
@@ -5,6 +17,20 @@
         }, result => {
             result = JSON.parse(result);
             log(result);
+            hide('#tbody_balance');
+            qs('#tbody_balance').innerHTML = '';
+            for (let currency in result['total_result']) {
+                qs('#tbody_balance').innerHTML += '<tr>' +
+                    '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>' +
+                    '<td>' + result['total_result'][currency]['balance'] + '</td>' +
+                    '<td>' + result['total_result'][currency]['price'] + '</td>' +
+                    '<td>' + result['total_result'][currency]['currentPrice'] + '</td>' +
+                    '<td>' + result['total_result'][currency]['earnedPer'] + '</td>' +
+                    '</tr>';
+            }
+            qs('#total_earned').innerHTML = '总收益率: ' + (result['total_earned'] * 100 / result['total_cost']).toFixed(2) + '%';
+
+            show('#tbody_balance');
         })
     }
 </script>
