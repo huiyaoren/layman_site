@@ -22,6 +22,10 @@
     .table-value {
         font-size: 0.8rem;
     }
+
+    .layui-table, .layui-table-view {
+        margin: 0 0 10px 0;
+    }
 </style>
 <div id="weather_block" style="transition:opacity 1s">
     {# block left #}
@@ -29,17 +33,17 @@
         <tbody>
         <tr>
             <td><i class="iconfont table-icon icon-kongqishidu"></i></td>
-            <td><span id="val_hud" class="table-value"></span></td>
+            <td>[<span id="val_hud" class="table-value"></span>]</td>
             <td><i class="iconfont table-icon icon-richu"></i></td>
-            <td><span id="val_sun_on" class="table-value"></span></td>
+            <td>[<span id="val_sun_on" class="table-value"></span>]</td>
             <td><i class="iconfont table-icon icon-riluo"></i></td>
-            <td><span id="val_sun_off" class="table-value"></span></td>
+            <td>[<span id="val_sun_off" class="table-value"></span>]</td>
             <td><i class="iconfont table-icon icon-daqiyali"></i></td>
-            <td><span id="val_press" class="table-value"></span></td>
+            <td>[<span id="val_press" class="table-value"></span>]</td>
             <td><i class="iconfont table-icon icon-ziwaixian"></i></td>
-            <td><span id="val_uv" class="table-value"></span></td>
+            <td>[<span id="val_uv" class="table-value"></span>]</td>
             <td><i class="wind iconfont table-icon icon-wind-1"></i></td>
-            <td><span id="val_wind" class="table-value"></span></td>
+            <td>[<span id="val_wind" class="table-value"></span>]</td>
         </tr>
         </tbody>
     </table>
@@ -55,10 +59,10 @@
             <span id="val_weather"></span>
             <span style="font-size: 1rem" id="val_tem_r"></span>
             <br>
-            <span style="font-size: 4rem;letter-spacing: -0.55rem;" id="val_tem"></span>
+            <span style="font-size: 5rem;letter-spacing: -0.4rem;" id="val_tem"></span>
             <br>
+            <span id="val_time">09:00:55 更新</span>
         </div>
-        <span id="val_time">09:00:55 更新</span>
     </div>
 </div>
 <script>
