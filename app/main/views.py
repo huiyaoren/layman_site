@@ -4,7 +4,7 @@ import sys
 from flask import render_template, current_app
 
 from . import main
-from app.parsers import weatherParser, goldParser, bitcoinParser
+from app.parsers import weatherParser, goldParser, bitcoinParser, BlockMarket, Dolloar, BlockMarketJson
 
 
 @main.route('/')
@@ -34,19 +34,35 @@ def home_data(name):
     return json.dumps(data)
 
 
-@main.route('/test')
+@main.route('/home/btc_balance')
 def btc_balance():
     sys.path.append(current_app.config['ADDITIONAL_PATH'])
     import virtual_coin
+
+    doller_price = float(Dolloar()['data']['美元/人民币(中间价)'])
+    block_market = BlockMarketJson()['data']
+    print(doller_price)
+    print(block_market)
+
     virtual_coin.current_market = {
-        'BCH': 8459,
-        'XRP': 4.42,
-        'BTM': 4.20,
-        'EOS': 81.79,
-        'ADA': 1.60,
-        'BTC': 54241.18,
-        'ETC': 115.18,
-        'ETH': 4509.62,
-        'IOST': 0.35,
+        'BCH': 0,
+        'XRP': 0,
+        'BTM': 0,
+        'EOS': 0,
+        'ADA': 0,
+        'BTC': 0,
+        'ETC': 0,
+        'ETH': 0,
+        'IOST': 0,
+        'HT': 0,
     }
+
+    for currency in virtual_coin.current_market:
+        if block_market.get(currency) is None:
+            continue
+        virtual_coin.current_market[currency] = round(doller_price * float(block_market[currency]['price']), 2)
+
+    block = BlockMarket()
+    print(block['data'])
+
     return json.dumps(virtual_coin.main())
