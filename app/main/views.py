@@ -4,7 +4,7 @@ import sys
 from flask import render_template, current_app
 
 from . import main
-from app.parsers import weatherParser, goldParser, bitcoinParser, BlockMarket, Dolloar, BlockMarketJson
+from app.parsers import parserGroup, parser_data
 
 
 @main.route('/')
@@ -13,24 +13,16 @@ def index():
 
 
 @main.route('/home_center')
-@main.route('/homecenter')
+@main.route('/home')
 def home_center():
-    weather = weatherParser['data']
-    gold = goldParser['data']
-    bitcoin = bitcoinParser['data']
-    return render_template('home_center.html', **locals())
+    return render_template('home_center.html')
 
 
 @main.route('/home/<name>', methods=['GET'])
 def home_data(name):
-    if name == 'weather':
-        data = weatherParser['data']
-    elif name == 'bitcoin':
-        data = bitcoinParser['data']
-    elif name == 'gold':
-        data = goldParser['data']
-    else:
-        data = {}
+    name = name.strip()
+    parser = getattr(parserGroup, '{0}Parser'.format(name), {})
+    data = parser['data']
     return json.dumps(data)
 
 
@@ -39,9 +31,9 @@ def btc_balance():
     sys.path.append(current_app.config['ADDITIONAL_PATH'])
     import virtual_coin
 
-    doller_price = float(Dolloar()['data']['美元/人民币(中间价)'])
-    block_market = BlockMarketJson()['data']
-    print(doller_price)
+    dollar_price = float(parser_data('dollar')['美元/人民币(中间价)'])
+    block_market = parser_data('blockMarket')
+    print(dollar_price)
     print(block_market)
 
     virtual_coin.current_market = {
@@ -60,9 +52,6 @@ def btc_balance():
     for currency in virtual_coin.current_market:
         if block_market.get(currency) is None:
             continue
-        virtual_coin.current_market[currency] = round(doller_price * float(block_market[currency]['price']), 2)
-
-    block = BlockMarket()
-    print(block['data'])
+        virtual_coin.current_market[currency] = round(dollar_price * float(block_market[currency]['price']), 2)
 
     return json.dumps(virtual_coin.main())

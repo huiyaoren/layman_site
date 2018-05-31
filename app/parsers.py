@@ -151,7 +151,7 @@ class BlockMarketJson(JsonParser):
         self.data = _
 
 
-class Dolloar(HtmlParser):
+class Dollar(HtmlParser):
     def set_config(self):
         self.url = 'http://www.currencydo.com/'
         self.patterns = {
@@ -162,15 +162,29 @@ class Dolloar(HtmlParser):
         self.data['美元/人民币(中间价)'] = round(float(self.data['美元/人民币(中间价)']) / 100, 2)
 
 
+def parser_data(parser_name):
+    name = parser_name.strip()
+    parser = getattr(parserGroup, '{0}Parser'.format(name), {})
+    return parser['data']
+
+
+class ParserGroup():
+    def __init__(self):
+        self.weatherParser = Weather()
+        self.goldParser = Gold()
+        self.bitcoinParser = Bitcoin()
+        self.blockMarketParser = BlockMarketJson()
+        self.dollarParser = Dollar()
+
+
+parserGroup = ParserGroup()
+
+
 @log_time_with_name('main')
 def main():
     test = BlockMarketJson()
     pprint(test['data'])
 
-
-weatherParser = Weather()
-goldParser = Gold()
-bitcoinParser = Bitcoin()
 
 if __name__ == '__main__':
     main()
