@@ -10,6 +10,9 @@ HomeView.prototype.getDay = getDay.bind(home);
 HomeView.prototype.getTime = getTime.bind(home);
 HomeView.prototype.getBitcoin = getBitcoin.bind(home);
 HomeView.prototype.getGold = getGold.bind(home);
+HomeView.prototype.getDollar = getDollar.bind(home);
+HomeView.prototype.getblockMarket = getblockMarket.bind(home);
+HomeView.prototype.getMyBalance = getMyBalance.bind(home);
 
 home.getDay();
 home.getTime();

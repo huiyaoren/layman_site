@@ -1,0 +1,10 @@
+<script>
+    function getblockMarket() {
+        this._fetchWith("{{ url_for('main.home_data', name='blockMarket', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            result = JSON.parse(result);
+            log(result);
+        })
+    }
+</script>

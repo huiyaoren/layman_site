@@ -26,7 +26,7 @@ def home_data(name):
     return json.dumps(data)
 
 
-@main.route('/home/btc_balance')
+@main.route('/home/my_balance')
 def btc_balance():
     sys.path.append(current_app.config['ADDITIONAL_PATH'])
     import virtual_coin

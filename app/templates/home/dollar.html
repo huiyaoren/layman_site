@@ -1,0 +1,11 @@
+<script>
+    function getDollar() {
+        this._fetchWith("{{ url_for('main.home_data', name='dollar', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            result = JSON.parse(result);
+            log(result);
+            this.dollar = parseFloat(result['美元/人民币(中间价)']);
+        })
+    }
+</script>

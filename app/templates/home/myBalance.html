@@ -1,0 +1,10 @@
+<script>
+    function getMyBalance() {
+        this._fetchWith("{{ url_for('main.home_data', name='my_balance', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            result = JSON.parse(result);
+            log(result);
+        })
+    }
+</script>
