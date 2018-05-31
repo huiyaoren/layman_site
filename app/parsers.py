@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 
 import requests
 from lxml import etree
@@ -57,7 +58,11 @@ class JsonParser(HtmlParser):
         result = json
         for k in keys:
             result = result[k]
-        return result.strip()
+
+        if isinstance(result, str):
+            result = result.strip()
+
+        return result
 
     def parse(self):
         patterns = self.patterns
@@ -118,7 +123,6 @@ class BlockMarket(HtmlParser):
             '涨幅 (24H)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[4]/span/span/text()',
             '交易量': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[6]/span/text()',
             '市值': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[7]/span/text()',
-            '图片': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[2]/div/span/img/@src',
         }
 
     def after_parse(self):
@@ -128,16 +132,40 @@ class BlockMarket(HtmlParser):
             'increase': self.data['涨幅 (24H)'][i].strip(),
             'transaction': self.data['交易量'][i].strip(),
             'market_value': self.data['市值'][i].strip(),
-            'icon': self.data['图片'][i].strip(),
         } for i in range(60)}
         self.data = result
 
 
+class BlockMarketJson(JsonParser):
+    def set_config(self):
+        self.url = 'https://block.cc/api/v1/coin/flow?size=500&orderby=-1'
+        self.patterns = {
+            'list': 'data.list',
+        }
+
+    def after_parse(self):
+        _ = {}
+        li = self.data
+        for i in li['list']:
+            _[i['symbol']] = i
+        self.data = _
+
+
+class Dolloar(HtmlParser):
+    def set_config(self):
+        self.url = 'http://www.currencydo.com/'
+        self.patterns = {
+            '美元/人民币(中间价)': '//*[@id="worldBanks"]/tbody/tr[26]/td[2]/text()',
+        }
+
+    def after_parse(self):
+        self.data['美元/人民币(中间价)'] = round(float(self.data['美元/人民币(中间价)']) / 100, 2)
+
+
 @log_time_with_name('main')
 def main():
-    test = BlockMarket()
-    print(test['data'])
-    pass
+    test = BlockMarketJson()
+    pprint(test['data'])
 
 
 weatherParser = Weather()
