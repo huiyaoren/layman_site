@@ -1,6 +1,6 @@
 <style>
     .layui-table td, .layui-table th {
-        padding: 3px 2px;
+        padding: 2px 1px;
     }
 
     .layui-table tr {
@@ -10,51 +10,55 @@
     .layui-table tbody tr:hover, .layui-table thead tr, .layui-table[lay-even] tr:nth-child(even) {
         background-color: rgba(0, 0, 0, 0);
     }
+
+    #weather_block {
+        text-align: right;
+    }
+
+    .table-icon {
+        font-size: 1.2rem;
+    }
+
+    .table-value {
+        font-size: 0.8rem;
+    }
 </style>
 <div id="weather_block" style="transition:opacity 1s">
-    {# line 1 #}
-    <i class="iconfont weather_1" style="font-size: 5rem"></i>
-    <span class="weather_or" style="font-size: 2rem"></span>
-    <i class="iconfont weather_2" style="font-size: 2.5rem"></i>
-    <span id="val_weather" style="font-size: 1rem"></span>
-    <span style="font-size: 2.5rem" id="val_tem_r"></span>
-    <br>
+    {# block left #}
+    <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+        <tbody>
+        <tr>
+            <td><i class="iconfont table-icon icon-kongqishidu"></i></td>
+            <td><span id="val_hud" class="table-value"></span></td>
+            <td><i class="iconfont table-icon icon-richu"></i></td>
+            <td><span id="val_sun_on" class="table-value"></span></td>
+            <td><i class="iconfont table-icon icon-riluo"></i></td>
+            <td><span id="val_sun_off" class="table-value"></span></td>
+            <td><i class="iconfont table-icon icon-daqiyali"></i></td>
+            <td><span id="val_press" class="table-value"></span></td>
+            <td><i class="iconfont table-icon icon-ziwaixian"></i></td>
+            <td><span id="val_uv" class="table-value"></span></td>
+            <td><i class="wind iconfont table-icon icon-wind-1"></i></td>
+            <td><span id="val_wind" class="table-value"></span></td>
+        </tr>
+        </tbody>
+    </table>
 
-    {# line 2 #}
-    <span style="font-size: 3rem" id="val_tem"></span>
-    &nbsp;&nbsp;&nbsp;
-    <span id="val_time">09:00:55 更新</span>
-
-    {# line 3 #}
-    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10">
-        <table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
-            <tbody>
-            <tr>
-                <td><i class="iconfont icon-kongqishidu" style="font-size: 2rem"></i></td>
-                <td><span id="val_hud" style="font-size: 1.1rem"></span></td>
-                <td><i class="iconfont icon-richu" style="font-size: 2rem"></i></td>
-                <td><span id="val_sun_on" style="font-size: 1.1rem"></span></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i class="iconfont icon-ziwaixian" style="font-size: 2rem"></i></td>
-                <td><span id="val_uv" style="font-size: 1.1rem"></span></td>
-                <td><i class="iconfont icon-riluo" style="font-size: 2rem"></i></td>
-                <td><span id="val_sun_off" style="font-size: 1.1rem"></span></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i class="iconfont icon-daqiyali" style="font-size: 2rem"></i></td>
-                <td><span id="val_press" style="font-size: 1.1rem"></span></td>
-                <td><i class="wind iconfont icon-wind-1" style="font-size: 2rem"></i></td>
-                <td><span id="val_wind" style="font-size: 1.1rem"></span></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
+    {# block right #}
+    <div style="position: relative">
+        <div style="position: absolute;padding:1rem;border-right: solid 0.1rem white;left: 4.5rem;top: 0;">
+            <i class="iconfont weather_1" style="font-size: 7rem"></i>
+            <span class="weather_or" style="font-size: 2rem"></span>
+            <i class="iconfont weather_2" style="font-size: 3.5rem"></i>
+        </div>
+        <div style="">
+            <span id="val_weather"></span>
+            <span style="font-size: 1rem" id="val_tem_r"></span>
+            <br>
+            <span style="font-size: 4rem" id="val_tem"></span>
+            <br>
+        </div>
+        <span id="val_time">09:00:55 更新</span>
     </div>
 </div>
 <script>

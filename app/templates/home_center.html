@@ -75,9 +75,8 @@
 <body>
 
 <div class="layui-row">
-    <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
         {% include 'home_datetime.html' %}
-        {% include 'home_weather.html' %}
         {% include 'home_gold.html' %}
         {% include 'home_bitcoin.html' %}
         {#        <div class="layui-tab layui-tab-brief">#}
@@ -93,8 +92,8 @@
         {#            </div>#}
         {#        </div>#}
     </div>
-    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4" style="text-align: right">
-        2
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
+        {% include 'home_weather.html' %}
     </div>
 </div>
 </body>
