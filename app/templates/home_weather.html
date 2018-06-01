@@ -41,7 +41,7 @@
             <td>[<span id="val_sun_off" class="table-value"></span>]</td>
             <td><i class="iconfont table-icon icon-daqiyali"></i></td>
             <td>[<span id="val_press" class="table-value"></span>]</td>
-            <td><i class="iconfont table-icon icon-ziwaixian"></i></td>
+            <td><i class="iconfont table-icon icon-ziwaixianzhishu"></i></td>
             <td>[<span id="val_uv" class="table-value"></span>]</td>
             <td><i class="wind iconfont table-icon icon-wind-1"></i></td>
             <td>[<span id="val_wind" class="table-value"></span>]</td>
@@ -68,18 +68,20 @@
 </div>
 <script>
     let weather_list = {
-        '晴': 'icon-sun',
-        '多云': 'icon-cloudy',
-        '阴': 'icon-overcast',
-        '小雨': 'icon-rain-1',
-        '中雨': 'icon-rain-2',
-        '大雨': 'icon-rain-3',
-        '阵雨': 'icon-rain-thunder',
-        '雷阵雨': 'icon-rain-thunder',
-        '暴雨': 'icon-rain-4',
-        '小雪': 'icon-snow-1',
-        '中雪': 'icon-snow-2',
-        '大雪': 'icon-rain-snow',
+        '晴': 'icon-qing',
+        '多云': 'icon-duoyun',
+        '阴': 'icon-yintian',
+        '小雨': 'icon-xiaoyu',
+        '中雨': 'icon-zhongyu',
+        '大雨': 'icon-dayu',
+        '阵雨': 'icon-zhenyu',
+        '雷阵雨': 'icon-leizhenyu',
+        '暴雨': 'icon-baoyu',
+        '大暴雨': 'icon-dabaoyu',
+        '特大暴雨': 'icon-tedabaoyu',
+        '阵雪': 'icon-zhenxue',
+        '小雪': 'icon-xiaoxue',
+        '大雪': 'icon-daxue',
     };
 
     function getWeather() {
@@ -91,7 +93,7 @@
 
             hide('#weather_block');
 
-            qs('#val_tem').innerHTML = result['实时气温'];
+            qs('#val_tem').innerHTML = result['实时气温'].replace('℃', '°');
             qs('#val_sun_on').innerHTML = result['日出时间'];
             qs('#val_sun_off').innerHTML = result['日落时间'];
             qs('#val_press').innerHTML = result['气压'];
