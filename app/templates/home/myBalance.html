@@ -27,7 +27,7 @@
             result = JSON.parse(result);
             log(result);
             hide('#tbody_balance');
-
+            {# fixme-1 由 jinja 处理模板数据 #}
             qs('#tbody_balance').innerHTML = '';
             for (let currency in result['total_result']) {
                 str = '';
@@ -35,9 +35,9 @@
                 str += '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>';
                 str += '<td align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>';
                 if (parseFloat(result['total_result'][currency]['earnedPer']) > 0) {
-                    str += '<td align="right" style="color:#f55858">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                    str += '<td align="right"><span style="background-color:#f55858;color:black">' + result['total_result'][currency]['earnedPer'] + '%</span></td>';
                 } else {
-                    str += '<td align="right" style="color:#03c087">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                    str += '<td align="right"><span style="background-color:#03c087;color:black">' + result['total_result'][currency]['earnedPer'] + '%</span></td>';
                 }
                 str += '</tr>';
                 qs('#tbody_balance').innerHTML += str;
