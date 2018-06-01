@@ -1,6 +1,6 @@
 <style>
     .layui-table td, .layui-table th {
-        padding: 2px 1px;
+        padding: 0.125rem 0.0625rem;
     }
 
     #table_balance td, #table_balance th {
@@ -30,11 +30,17 @@
 
             qs('#tbody_balance').innerHTML = '';
             for (let currency in result['total_result']) {
-                qs('#tbody_balance').innerHTML += '<tr>' +
-                    '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>' +
-                    '<td align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>' +
-                    '<td align="right">' + result['total_result'][currency]['earnedPer'] + '%</td>' +
-                    '</tr>';
+                str = '';
+                str += '<tr>';
+                str += '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>';
+                str += '<td align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>';
+                if (parseFloat(result['total_result'][currency]['earnedPer']) > 0) {
+                    str += '<td align="right" style="color:#f55858">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                } else {
+                    str += '<td align="right" style="color:#03c087">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                }
+                str += '</tr>';
+                qs('#tbody_balance').innerHTML += str;
             }
             qs('#total_earned').innerHTML = '总收益率: ' + (result['total_earned'] * 100 / result['total_cost']).toFixed(2) + '%';
 
