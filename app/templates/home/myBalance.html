@@ -1,15 +1,24 @@
-<table class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
-    <tr>
-        <th>货币名</th>
-        <th>持仓数量</th>
-        <th>持仓成本价格</th>
-        <th>当前价格</th>
-        <th>盈亏百分比</th>
-    </tr>
-    <tbody id="tbody_balance">
-    </tbody>
-</table>
-<span id="total_earned"></span>
+<style>
+    .layui-table td, .layui-table th {
+        padding: 2px 1px;
+    }
+
+    #table_balance td, #table_balance th {
+        border-right: solid 0.1rem white;
+        font-size: 1rem;
+    }
+</style>
+
+<div class="layui-col-xs6">
+    <table id="table_balance" class="layui-table" lay-even="" lay-skin="nob" style="background-color:rgba(0,0,0,0)">
+        <tbody id="tbody_balance">
+        </tbody>
+    </table>
+</div>
+<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+    <span id="total_earned"></span>
+</div>
+
 <script>
     function getMyBalance() {
         this._fetchWith("{{ url_for('main.home_data', name='my_balance', _external=True) }}", {
@@ -18,14 +27,13 @@
             result = JSON.parse(result);
             log(result);
             hide('#tbody_balance');
+
             qs('#tbody_balance').innerHTML = '';
             for (let currency in result['total_result']) {
                 qs('#tbody_balance').innerHTML += '<tr>' +
                     '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>' +
-                    '<td>' + result['total_result'][currency]['balance'] + '</td>' +
-                    '<td>' + result['total_result'][currency]['price'] + '</td>' +
-                    '<td>' + result['total_result'][currency]['currentPrice'] + '</td>' +
-                    '<td>' + result['total_result'][currency]['earnedPer'] + '</td>' +
+                    '<td align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>' +
+                    '<td align="right">' + result['total_result'][currency]['earnedPer'] + '%</td>' +
                     '</tr>';
             }
             qs('#total_earned').innerHTML = '总收益率: ' + (result['total_earned'] * 100 / result['total_cost']).toFixed(2) + '%';
