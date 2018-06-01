@@ -88,6 +88,9 @@ class Weather(HtmlParser):
             '发布时间': '//*[@id="wrap"]/div[6]/div[1]/div[2]/text()',
         }
 
+    def after_parse(self):
+        self.data['气压'] = self.data['气压'].replace(' ', '')
+
 
 class Gold(HtmlParser):
     def set_config(self):
