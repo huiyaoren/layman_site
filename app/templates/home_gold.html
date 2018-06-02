@@ -3,7 +3,7 @@
         <tbody>
         <tr>
             <td>账户黄金(人民币):</td>
-            <td><span id="val_gold" style="font-size: 2rem"></span></td>
+            <td><span id="val_gold" style="font-size: 3rem"></span></td>
             <td></td>
             <td></td>
         </tr>
@@ -16,7 +16,7 @@
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
-            qs('#val_gold').innerHTML = result['账户黄金(人民币)']
+            qs('#val_gold').innerHTML = '¥' + result['账户黄金(人民币)']
         })
     }
 </script>
