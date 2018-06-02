@@ -1,20 +1,35 @@
 <style>
-    table img {
+    .zhihu-table img {
         width: 6rem;
         height: 6rem;
     }
+
+    .zhihu-table tr {
+        transition: width 2s;
+        height: 6rem;
+    }
 </style>
-<div style="height: 18rem;overflow: hidden;margin-top: 0.5rem">
-    <table id="" class="layui-table" lay-even="" lay-skin="nob" >
+<div style="height: 20rem;overflow: hidden;margin-top: 0.5rem;position: relative;">
+    <table id="" class="layui-table zhihu-table" lay-even="" lay-skin="nob" style="position: absolute;top: 0rem;transition: top 2s;">
         <tbody id="">
-        {% for i in range(6) %}
-            <tr style="opacity: {{ 1 - 0.2 * loop.index0 }}">
-                <td><img src="{{ data['image'][i] }}" alt=""></td>
-                <td style="font-size: 2rem"><a class="daily_page" href="{{ data['page'][i] }}"></a>{{ data['title'][i] }}</td>
-                <td class="qrcode"></td>
+        {% for i in range(30) %}
+            <tr class="zhihu-table-tr">
+                {% if loop.index is divisibleby(2) %}
+                    <td><img src="{{ data['image'][i] }}" alt=""></td>
+                {% else %}
+                    <td class="qrcode"></td>
+                {% endif %}
+                <td style="font-size: 2rem"><a class="daily_page"
+                                               href="{{ data['page'][i] }}"></a>{{ data['title'][i] }}</td>
+                {% if loop.index is divisibleby(2) %}
+                    <td class="qrcode"></td>
+                {% else %}
+                    <td><img src="{{ data['image'][i] }}" alt=""></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div style="position: absolute;top: 0rem;height: 20rem;z-index: 1;width: 100%;background: linear-gradient(to bottom, rgba(0,0,0,0), black);" ></div>
 </div>
 

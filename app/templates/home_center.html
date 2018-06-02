@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="referrer" content="no-referrer" />
+    <meta name="referrer" content="no-referrer"/>
     <title>Home-center</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='layui/css/layui.css') }}">
     {#    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/iconfont.css') }}">#}
@@ -108,14 +108,17 @@
     </div>
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
         {% include 'home_weather.html' %}
-            <div id="future_weather"></div>
+        <div id="future_weather"></div>
     </div>
     <div class="layui-col-xs12" style="text-align: center">
-            <div id="zhihu_daily"></div>
+        <div id="zhihu_daily"></div>
     </div>
 
 </div>
 </body>
+<script src="{{ url_for('static', filename='qrcodejs/qrcode.min.js') }}"></script>
+<script src="{{ url_for('static', filename='qrcodejs/jquery.min.js') }}"></script>
+
 <script>
     function getFutureWeather() {
         this._fetchWith("{{ url_for('main.home_data', name='future_weather', _external=True) }}", {
@@ -124,6 +127,7 @@
             qs('#future_weather').innerHTML = result;
         })
     }
+
     function getZhihuDaily() {
         this._fetchWith("{{ url_for('main.zhihu_daily', name='zhihu_daily', _external=True) }}", {
             'method': 'GET'
@@ -136,8 +140,17 @@
             }
         })
     }
+
+    setInterval(() => {
+        let table = qs('.zhihu-table');
+        let t = Number(table.style.top.replace('rem', ''));
+        if (t + 6 * qsa('.zhihu-table-tr').length <= 20) {
+            table.style.top = '0rem';
+        } else {
+            table.style.top = (t - 6) + 'rem';
+        }
+    }, 5000);
 </script>
-<script src="{{ url_for('static', filename='qrcodejs/qrcode.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/home/main.js') }}"></script>
 
 </html>
