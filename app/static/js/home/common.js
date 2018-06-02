@@ -327,3 +327,7 @@ function show(query, duration = 1000, iterations = 1) {
         iterations: iterations
     });
 }
+
+function reload() {
+    window.location.href = window.location.href;
+}

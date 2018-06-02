@@ -26,4 +26,5 @@ setInterval(home.getTime, 10 * 1000);
 setInterval(home.getWeather, 60 * 1000);
 setInterval(home.getGold, 100 * 1000);
 setInterval(home.getMyBalance, 120 * 1000);
-setInterval(home.home.getFutureWeather, 1800 * 1000);
+setInterval(home.home.getFutureWeather, 600 * 1000);
+setInterval(reload, 1800 * 1000);
