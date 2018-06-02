@@ -200,6 +200,10 @@ class ZhihuDaily(HtmlParser):
             'page': '/html/body/div[3]/div/div[2]/div/div/div/div/a/@href',
         }
 
+    def after_parse(self):
+        for k, i in enumerate(self.data['page']):
+            self.data['page'][k] = 'https://daily.zhihu.com{0}'.format(i)
+
 def parser_data(parser_name):
     name = parser_name.strip()
     parser = getattr(parserGroup, '{0}Parser'.format(name), {})

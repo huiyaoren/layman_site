@@ -132,7 +132,7 @@
             qs('#zhihu_daily').innerHTML = result['view'];
 
             for (let i in qsa(".qrcode")) {
-                new QRCode(qsa(".qrcode")[i], qsa(".daily_page")[i].href);
+                new QRCode(qsa(".qrcode")[i], String(qsa(".daily_page")[i].href));
             }
         })
     }
