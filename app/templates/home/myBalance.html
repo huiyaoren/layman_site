@@ -5,7 +5,6 @@
 
     #table_balance td, #table_balance th {
         font-size: 1.125rem;
-        color: black;
         padding: 0.15rem 0.1rem;
     }
 
@@ -36,13 +35,14 @@
             for (let currency in result['total_result']) {
                 str = '';
                 if (parseFloat(result['total_result'][currency]['earnedPer']) > 0) {
-                    str += '<tr style="background-color:#f55858">';
+                    bg = 'style="background-color:white;color:black;"';
                 } else {
-                    str += '<tr style="background-color:#03c087">';
+                    bg = 'style="background-color:black;color:white;"';
                 }
-                str += '<td>' + result['total_result'][currency]['CurrencyName'] + '</td>';
-                str += '<td align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>';
-                str += '<td align="right">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                str += '<tr ' + bg +'">';
+                str += '<td ' + bg + '>' + result['total_result'][currency]['CurrencyName'] + '</td>';
+                str += '<td ' + bg + ' align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>';
+                str += '<td ' + bg + ' align="right">' + result['total_result'][currency]['earnedPer'] + '%</td>';
                 str += '</tr>';
                 qs('#tbody_balance').innerHTML += str;
             }
