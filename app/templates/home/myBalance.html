@@ -47,7 +47,7 @@
                 str += '</tr>';
                 qs('#tbody_balance').innerHTML += str;
             }
-            qs('#total_earned').innerHTML = '总收益率: ' + (result['total_earned'] * 100 / result['total_cost']).toFixed(2) + '%';
+            qs('#total_earned').innerHTML = '区块链总收益率: ' + (result['total_earned'] * 100 / result['total_cost']).toFixed(2) + '%';
 
             show('#tbody_balance');
         })

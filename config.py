@@ -9,7 +9,7 @@ class Config:
         pass
 
 class DefaultConfig(Config):
-    ADDITIONAL_PATH = r'/host/Project/scripts'
+    ADDITIONAL_PATH = r'F:\project\python_scripts'
     pass
 
 config = {
