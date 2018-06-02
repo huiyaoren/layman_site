@@ -1,0 +1,13 @@
+<div class="layui-col-xs5" style="float: right;margin-top: 2rem">
+    <table id="" class="layui-table" lay-even="" lay-skin="nob" style="">
+        <tbody id="">
+        {% for i in data[:8] %}
+            <tr style="opacity: {{ 1 - loop.index * 0.1 }}">
+                <td style="font-size: 1.125rem">{{ i['dt_txt'] }}</td>
+                <td style="font-size: 1.125rem">{{ i['description'] }}</td>
+                <td style="font-size: 1.125rem">{{ i['temp'] }}°</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

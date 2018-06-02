@@ -20,10 +20,13 @@ def home_center():
 
 @main.route('/home/<name>', methods=['GET'])
 def home_data(name):
-    name = name.strip()
-    parser = getattr(parserGroup, '{0}Parser'.format(name), {})
-    data = parser['data']
-    return json.dumps(data)
+    return json.dumps(parser_data(name))
+
+
+@main.route('/home/future_weather')
+def future_weather():
+    data = parser_data('futureWeather')
+    return render_template('home/futureWeather.html', **locals())
 
 
 @main.route('/home/my_balance')

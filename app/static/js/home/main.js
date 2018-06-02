@@ -12,18 +12,18 @@ HomeView.prototype.getGold = getGold.bind(home);
 HomeView.prototype.getDollar = getDollar.bind(home);
 HomeView.prototype.getblockMarket = getblockMarket.bind(home);
 HomeView.prototype.getMyBalance = getMyBalance.bind(home);
-// HomeView.prototype.getBitcoin = getBitcoin.bind(home);
+HomeView.prototype.getFutureWeather = getFutureWeather.bind(home);
 
 home.getDay();
 home.getWeather();
 home.getTime();
 home.getGold();
 home.getMyBalance();
-// home.getBitcoin();
+home.getFutureWeather();
 
 setInterval(home.getDay, 10 * 1000);
 setInterval(home.getTime, 10 * 1000);
 setInterval(home.getWeather, 60 * 1000);
 setInterval(home.getGold, 100 * 1000);
 setInterval(home.getMyBalance, 120 * 1000);
-// setInterval(home.getBitcoin, 80 * 1000);
+setInterval(home.home.getFutureWeather, 1800 * 1000);

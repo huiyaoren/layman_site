@@ -1,7 +1,9 @@
 import json
+from datetime import datetime
 from pprint import pprint
 
 import requests
+import time
 from lxml import etree
 
 from app.time_recoder import log_time, log_time_with_name
@@ -164,6 +166,30 @@ class Dollar(HtmlParser):
     def after_parse(self):
         self.data['美元/人民币(中间价)'] = round(float(self.data['美元/人民币(中间价)']) / 100, 2)
 
+class FutureWeather(JsonParser):
+    def set_config(self):
+        self.url = 'http://api.openweathermap.org/data/2.5/forecast?q=fuzhou&APPID=db97196be09b5c80f170423ac3799431&mode=json&lang=zh_cn&units=metric'
+        self.patterns = {
+            'list': 'list',
+        }
+
+    def after_parse(self):
+        _ = []
+        li = self.data
+        for i in  li['list']:
+            i['dt_txt'] = datetime.fromtimestamp(int(i['dt'])).strftime("%Y-%m-%d %H:%M:%S")
+            i['dt_txt'] = i['dt_txt'][5:16]
+            i['main']['temp'] = round(float(i['main']['temp']))
+            _.append({
+                'description': i['weather'][0]['description'],
+                'temp': i['main']['temp'],
+                'pressure': i['main']['pressure'],
+                'humidity': i['main']['humidity'],
+                'dt_txt': i['dt_txt'],
+                'dt': i['dt'],
+            })
+        self.data = _
+
 
 def parser_data(parser_name):
     name = parser_name.strip()
@@ -178,6 +204,7 @@ class ParserGroup():
         self.bitcoinParser = Bitcoin()
         self.blockMarketParser = BlockMarketJson()
         self.dollarParser = Dollar()
+        self.futureWeatherParser = FutureWeather()
 
 
 parserGroup = ParserGroup()
@@ -185,7 +212,7 @@ parserGroup = ParserGroup()
 
 @log_time_with_name('main')
 def main():
-    test = BlockMarketJson()
+    test = FutureWeather()
     pprint(test['data'])
 
 

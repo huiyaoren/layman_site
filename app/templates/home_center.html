@@ -16,17 +16,17 @@
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 0.875rem;;
+            font-size: 0.875rem;
         }
 
         html {
-            font-size:1.5625vw;
+            font-size: 1.5625vw;
         }
 
         body {
             padding: 1rem;
             background: black;
-            font-family: 'Microsoft Yahei','Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+            font-family: 'Microsoft Yahei', 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
             height: 100%;
             overflow: hidden;
         }
@@ -71,6 +71,12 @@
             height: 50vh;
             display: flex;
         }
+
+        .layui-table {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            color: #666;
+        }
     </style>
     <!--<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
     <script src="{{ url_for('static', filename='layui/layui.js') }}"></script>
@@ -101,8 +107,18 @@
     </div>
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
         {% include 'home_weather.html' %}
+        <div id="future_weather"></div>
     </div>
 </div>
 </body>
+<script>
+    function getFutureWeather() {
+        this._fetchWith("{{ url_for('main.home_data', name='future_weather', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            qs('#future_weather').innerHTML = result;
+        })
+    }
+</script>
 <script src="{{ url_for('static', filename='js/home/main.js') }}"></script>
 </html>
