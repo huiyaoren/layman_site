@@ -1,0 +1,20 @@
+<style>
+    table img {
+        width: 6rem;
+        height: 6rem;
+    }
+</style>
+<div style="height: 18rem;overflow: hidden;margin-top: 0.5rem">
+    <table id="" class="layui-table" lay-even="" lay-skin="nob" >
+        <tbody id="">
+        {% for i in range(6) %}
+            <tr style="opacity: {{ 1 - 0.2 * loop.index0 }}">
+                <td><img src="{{ data['image'][i] }}" alt=""></td>
+                <td style="font-size: 2rem"><a class="daily_page" href="{{ data['page'][i] }}"></a>{{ data['title'][i] }}</td>
+                <td class="qrcode"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+

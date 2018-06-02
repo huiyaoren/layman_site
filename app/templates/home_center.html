@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer" />
     <title>Home-center</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='layui/css/layui.css') }}">
     {#    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/iconfont.css') }}">#}
@@ -107,8 +108,12 @@
     </div>
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
         {% include 'home_weather.html' %}
-        <div id="future_weather"></div>
+            <div id="future_weather"></div>
     </div>
+    <div class="layui-col-xs12" style="text-align: center">
+            <div id="zhihu_daily"></div>
+    </div>
+
 </div>
 </body>
 <script>
@@ -119,6 +124,20 @@
             qs('#future_weather').innerHTML = result;
         })
     }
+    function getZhihuDaily() {
+        this._fetchWith("{{ url_for('main.zhihu_daily', name='zhihu_daily', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            result = JSON.parse(result);
+            qs('#zhihu_daily').innerHTML = result['view'];
+
+            for (let i in qsa(".qrcode")) {
+                new QRCode(qsa(".qrcode")[i], qsa(".daily_page")[i].href);
+            }
+        })
+    }
 </script>
+<script src="{{ url_for('static', filename='qrcodejs/qrcode.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/home/main.js') }}"></script>
+
 </html>

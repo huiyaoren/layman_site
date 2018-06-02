@@ -191,6 +191,15 @@ class FutureWeather(JsonParser):
         self.data = _
 
 
+class ZhihuDaily(HtmlParser):
+    def set_config(self):
+        self.url = 'https://daily.zhihu.com/'
+        self.patterns = {
+            'title': '/html/body/div[3]/div/div[2]/div/div/div/div/a/span/text()',
+            'image': '/html/body/div[3]/div/div[2]/div/div/div/div/a/img/@src',
+            'page': '/html/body/div[3]/div/div[2]/div/div/div/div/a/@href',
+        }
+
 def parser_data(parser_name):
     name = parser_name.strip()
     parser = getattr(parserGroup, '{0}Parser'.format(name), {})
@@ -205,6 +214,7 @@ class ParserGroup():
         self.blockMarketParser = BlockMarketJson()
         self.dollarParser = Dollar()
         self.futureWeatherParser = FutureWeather()
+        self.zhihuDailyParser = ZhihuDaily()
 
 
 parserGroup = ParserGroup()
@@ -212,7 +222,7 @@ parserGroup = ParserGroup()
 
 @log_time_with_name('main')
 def main():
-    test = FutureWeather()
+    test = ZhihuDaily()
     pprint(test['data'])
 
 

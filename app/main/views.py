@@ -29,6 +29,15 @@ def future_weather():
     return render_template('home/futureWeather.html', **locals())
 
 
+@main.route('/home/zhihu_daily')
+def zhihu_daily():
+    data = parser_data('zhihuDaily')
+    return json.dumps({
+        'view': render_template('home/zhihuDaily.html', **locals()),
+        'data': data,
+    })
+
+
 @main.route('/home/my_balance')
 def btc_balance():
     sys.path.append(current_app.config['ADDITIONAL_PATH'])
