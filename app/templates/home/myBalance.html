@@ -30,7 +30,6 @@
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
-            log(result);
             hide('#tbody_balance');
             {# fixme-1 由 jinja 处理模板数据 #}
             qs('#tbody_balance').innerHTML = '';

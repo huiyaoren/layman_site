@@ -212,7 +212,7 @@ function clean_cache() {
 }
 
 /* 默认 false，请勿改动！ */
-window.debug = true;
+window.debug = false;
 
 let log = (...n) => {
     if (window.debug) {

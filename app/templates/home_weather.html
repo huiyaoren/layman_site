@@ -52,14 +52,15 @@
     {# block right #}
     <div style="position: relative">
         <div style="width: 17.5rem;position: absolute;padding:0.875rem;border-right: solid 0.1rem white;left: 0;top: 0;">
-            <i class="iconfont weather_1" style="font-size: 10rem"></i>
-            <span class="weather_or" style="font-size: 2rem"></span>
-            <i class="iconfont weather_2" style="font-size: 5rem"></i>
+{#            <i class="iconfont weather_1" style="font-size: 10rem"></i>#}
+{#            <span class="weather_or" style="font-size: 2rem"></span>#}
+{#            <i class="iconfont weather_2" style="font-size: 5rem"></i>#}
         </div>
         <div style="">
             <span style="font-size: 1.1rem" id="val_weather"></span>
             <span style="font-size: 1.1rem" id="val_tem_r"></span>
             <br>
+            <i class="iconfont weather_1" style="font-size: 6rem"></i>
             <span style="font-size: 6rem;letter-spacing: -0.4rem;" id="val_tem"></span>
             <br>
             <span style="font-size: 1.1rem" id="val_time">09:00:55 更新</span>
@@ -89,8 +90,6 @@
             'method': 'GET'
         }, result => {
             result = JSON.parse(result);
-            log(result);
-
             hide('#weather_block');
 
             qs('#val_tem').innerHTML = result['实时气温'].replace('℃', '°');
