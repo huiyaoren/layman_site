@@ -124,6 +124,7 @@ class BlockMarket(HtmlParser):
         self.url = 'https://block.cc/'
         self.patterns = {
             '名称': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[2]/div/span/span/em[1]/text()',
+            '全称': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/@id',
             '价格 (USD)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[3]/span/span/text()',
             '涨幅 (24H)': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[4]/span/span/text()',
             '交易量': '//*[@id="app"]/div[1]/div[2]/div/div[2]/div/div[3]/div/a/div[6]/span/text()',
@@ -133,6 +134,7 @@ class BlockMarket(HtmlParser):
     def after_parse(self):
         result = {self.data['名称'][i].strip(): {
             'name': self.data['名称'][i].strip(),
+            'fname': self.data['全称'][i].strip(),
             'price': self.data['价格 (USD)'][i].strip(),
             'increase': self.data['涨幅 (24H)'][i].strip(),
             'transaction': self.data['交易量'][i].strip(),
@@ -166,6 +168,7 @@ class Dollar(HtmlParser):
     def after_parse(self):
         self.data['美元/人民币(中间价)'] = round(float(self.data['美元/人民币(中间价)']) / 100, 2)
 
+
 class FutureWeather(JsonParser):
     def set_config(self):
         self.url = 'http://api.openweathermap.org/data/2.5/forecast?q=fuzhou&APPID=db97196be09b5c80f170423ac3799431&mode=json&lang=zh_cn&units=metric'
@@ -176,7 +179,7 @@ class FutureWeather(JsonParser):
     def after_parse(self):
         _ = []
         li = self.data
-        for i in  li['list']:
+        for i in li['list']:
             i['dt_txt'] = datetime.fromtimestamp(int(i['dt'])).strftime("%Y-%m-%d %H:%M:%S")
             i['dt_txt'] = i['dt_txt'][5:16]
             i['main']['temp'] = round(float(i['main']['temp']))
@@ -203,6 +206,7 @@ class ZhihuDaily(HtmlParser):
     def after_parse(self):
         for k, i in enumerate(self.data['page']):
             self.data['page'][k] = 'https://daily.zhihu.com{0}'.format(i)
+
 
 def parser_data(parser_name):
     name = parser_name.strip()
