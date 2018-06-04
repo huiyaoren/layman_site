@@ -143,7 +143,7 @@ class BlockMarket(HtmlParser):
 
 class BlockMarketJson(JsonParser):
     def set_config(self):
-        self.url = 'https://block.cc/api/v1/coin/flow?size=500&orderby=-1'
+        self.url = 'https://block.cc/api/v1/coin/flow?size=600&orderby=-1'
         self.patterns = {
             'list': 'data.list',
         }
