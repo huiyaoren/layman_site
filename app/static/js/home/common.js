@@ -308,20 +308,20 @@ function fetchBase(url, init, successBack, errorBack) {
     // });
 }
 
-function hide(query, duration = 500, iterations = 1) {
+function hide(query, duration = 200, iterations = 1) {
     qs(query).animate([
-        {opacity: '1'},
-        {opacity: '0'}
+        {opacity: '1',transform:'translateY(-2rem)'},
+        {opacity: '0',transform:'translateY(0rem)'}
     ], {
         duration: duration,
         iterations: iterations
     });
 }
 
-function show(query, duration = 1000, iterations = 1) {
+function show(query, duration = 500, iterations = 1) {
     qs(query).animate([
-        {opacity: '0'},
-        {opacity: '1'}
+        {opacity: '0',transform:'translateY(2rem)'},
+        {opacity: '1',transform:'translateY(0rem)'}
     ], {
         duration: duration,
         iterations: iterations

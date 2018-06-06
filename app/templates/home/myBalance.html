@@ -7,10 +7,6 @@
         font-size: 1.125rem;
         padding: 0.15rem 0.1rem;
     }
-
-    #table_balance tr {
-        opacity: 0.8;
-    }
 </style>
 
 <div class="layui-col-xs6">
@@ -20,7 +16,7 @@
     </table>
 </div>
 <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
-    <span id="total_earned"></span>
+    <span id="total_earned"></span><button type="button" style="background: white;color: black;padding:0.1rem;margin: 0.5rem" onclick="home.getMyBalance()">更新</button>
 </div>
 
 <script>
