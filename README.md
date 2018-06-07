@@ -2,7 +2,7 @@
 
 ## 关于 layman_site
 
-![image][image-1]
+![image](./doc/20180607135046.png)
 
 一个 python web 服务, 基于 flask 框架.
 
