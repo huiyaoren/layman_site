@@ -1,0 +1,16 @@
+server {
+    listen      80;
+    server_name localhost;
+    charset     utf-8;
+    client_max_body_size 75M;
+
+    location / { try_files $uri @yourapplication; }
+    location @yourapplication {
+        include uwsgi_params;
+        # uwsgi_pass unix:/host/Project/layman_site/uwsgi.sock;
+        uwsgi_pass   127.0.0.1:8001;  # 指向uwsgi 所应用的内部地址,所有请求将转发给uwsgi 处理
+        uwsgi_param UWSGI_PYHOME /home/msi/.virtualenvs/layman_site; # 指向虚拟环境目录
+        uwsgi_param UWSGI_CHDIR  /host/Project/layman_site; # 指向网站根目录
+        uwsgi_param UWSGI_SCRIPT manage:app; # 指定启动程序
+    }
+}
