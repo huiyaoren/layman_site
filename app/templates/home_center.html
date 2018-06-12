@@ -132,12 +132,13 @@
         this._fetchWith("{{ url_for('main.zhihu_daily', name='zhihu_daily', _external=True) }}", {
             'method': 'GET'
         }, result => {
+            hide('#zhihu_daily');
             result = JSON.parse(result);
             qs('#zhihu_daily').innerHTML = result['view'];
-
             for (let i in qsa(".qrcode")) {
                 new QRCode(qsa(".qrcode")[i], String(qsa(".daily_page")[i].href));
             }
+            show('#zhihu_daily');
         })
     }
 
