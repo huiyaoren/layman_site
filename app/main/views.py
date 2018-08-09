@@ -7,12 +7,12 @@ from . import main
 from app.parsers import parserGroup, parser_data
 
 
-@main.route('/')
+@main.route('/game')
 def index():
     return render_template('index.html')
 
 
-@main.route('/home_center')
+@main.route('/')
 @main.route('/home')
 def home_center():
     return render_template('home_center.html')
@@ -48,18 +48,8 @@ def btc_balance():
     print(dollar_price)
     print(block_market)
 
-    virtual_coin.current_market = {
-        'BCH': 0,
-        'XRP': 0,
-        'BTM': 0,
-        'EOS': 0,
-        'ADA': 0,
-        'BTC': 0,
-        'ETC': 0,
-        'ETH': 0,
-        'IOST': 0,
-        'HT': 0,
-    }
+    virtual_coin.current_market = {'BCH': 0, 'XRP': 0, 'BTM': 0, 'EOS': 0, 'ADA': 0, 'BTC': 0, 'ETC': 0, 'ETH': 0,
+                                   'IOST': 0, 'HT': 0, }
 
     for currency in virtual_coin.current_market:
         if block_market.get(currency) is None:
