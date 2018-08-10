@@ -1,5 +1,8 @@
 from datetime import datetime
 
+from flask import current_app
+
+from app.parsers import Dollar
 from .parsers import JsonParser
 
 
@@ -28,11 +31,58 @@ class BlockMarketJson(JsonParser):
         }
 
     def after_parse(self):
-        _ = {}
-        li = self.data
-        for i in li['list']:
-            _[i['symbol']] = i
-        self.data = _
+        data = {}
+        for i in self.data['list']:
+            data[i['symbol']] = i
+        self.data = data
+
+        current_list = ['BCH', 'XRP', 'BTM', 'EOS', 'ADA', 'BTC', 'ETC', 'ETH', 'IOST', 'HT', ]
+
+        dollar_price = float(Dollar.get_data()['美元/人民币(中间价)'])
+
+        current_market = {currency: round(dollar_price * float(data[currency]['price']), 2)
+                          for currency in current_list
+                          if data.get(currency) is not None}
+
+        self.data = self.get_balance_stat(current_market, current_app.config['BALANCE'])
+
+    def get_balance_stat(self, current_market, balance):
+        total_earned = 0
+        total_cost = 0
+        total_balance = {}
+        total_result = []
+
+        for i in balance:
+            for j in balance[i]:
+                total_cost += balance[i][j][0]
+                total_balance[j] = total_balance.get(j, [0, 0])
+                total_balance[j][0] += balance[i][j][0]
+                total_balance[j][1] += balance[i][j][1]
+
+        for i in total_balance:
+            old_price = total_balance[i][0] / total_balance[i][1]
+            earned = total_balance[i][1] * (current_market[i] - old_price)
+            total_earned += earned
+            total_result.append({
+                'CurrencyName': i,
+                'totalCost': total_balance[i][0],
+                'balance': round(total_balance[i][1], 6),
+                'price': round(old_price, 2),
+                'currentPrice': current_market[i],
+                'earnedPer': round(100 * earned / total_balance[i][0], 2),
+                'earned': round(earned, 2),
+            })
+
+        total_result = sorted(total_result, key=lambda x: float(x['earnedPer']), reverse=True)
+
+        from pprint import pprint
+        pprint(total_result)
+
+        return {
+            'total_earned': total_earned,
+            'total_cost': total_cost,
+            'total_result': total_result,
+        }
 
 
 class FutureWeather(JsonParser):

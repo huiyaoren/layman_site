@@ -1,10 +1,13 @@
 import json
 import sys
 
+import logging
 from flask import render_template, current_app
 
 from . import main
-from app.parsers import parserGroup, parser_data
+from app.parsers import parser_data, parsers
+
+logger = logging.getLogger(__name__)
 
 
 @main.route('/game')
@@ -40,20 +43,5 @@ def zhihu_daily():
 
 @main.route('/home/my_balance')
 def btc_balance():
-    sys.path.append(current_app.config['ADDITIONAL_PATH'])
-    import virtual_coin
+    return json.dumps(parser_data('blockMarket'))
 
-    dollar_price = float(parser_data('dollar')['美元/人民币(中间价)'])
-    block_market = parser_data('blockMarket')
-    print(dollar_price)
-    print(block_market)
-
-    virtual_coin.current_market = {'BCH': 0, 'XRP': 0, 'BTM': 0, 'EOS': 0, 'ADA': 0, 'BTC': 0, 'ETC': 0, 'ETH': 0,
-                                   'IOST': 0, 'HT': 0, }
-
-    for currency in virtual_coin.current_market:
-        if block_market.get(currency) is None:
-            continue
-        virtual_coin.current_market[currency] = round(dollar_price * float(block_market[currency]['price']), 2)
-
-    return json.dumps(virtual_coin.main())

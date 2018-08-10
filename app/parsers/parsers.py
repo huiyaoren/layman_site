@@ -37,6 +37,12 @@ class Parser():
             self.parse_data()
             return self.data
 
+    @classmethod
+    def get_data(cls):
+        self = cls()
+        self.parse_data()
+        return self.data
+
 
 class JsonParser(Parser):
     def items_in_json(self, json, pattern):
