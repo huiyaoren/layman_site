@@ -31,17 +31,12 @@ class BlockMarketJson(JsonParser):
         }
 
     def after_parse(self):
-        data = {}
-        for i in self.data['list']:
-            data[i['symbol']] = i
-        self.data = data
-
-        current_list = ['BCH', 'XRP', 'BTM', 'EOS', 'ADA', 'BTC', 'ETC', 'ETH', 'IOST', 'HT', ]
+        data = {i['symbol']: i for i in self.data['list']}
 
         dollar_price = float(Dollar.get_data()['美元/人民币(中间价)'])
 
         current_market = {currency: round(dollar_price * float(data[currency]['price']), 2)
-                          for currency in current_list
+                          for currency in current_app.config['CURRENT_LIST']
                           if data.get(currency) is not None}
 
         self.data = self.get_balance_stat(current_market, current_app.config['BALANCE'])
@@ -74,9 +69,6 @@ class BlockMarketJson(JsonParser):
             })
 
         total_result = sorted(total_result, key=lambda x: float(x['earnedPer']), reverse=True)
-
-        from pprint import pprint
-        pprint(total_result)
 
         return {
             'total_earned': total_earned,

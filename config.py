@@ -43,6 +43,7 @@ class DefaultConfig(Config):
     CURRENT_MARKET['IOST'] = 0.26
     CURRENT_MARKET['HT'] = 24.83
 
+    CURRENT_LIST = list(set(BALANCE['huobi'].keys()) | set(BALANCE['okex'].keys()))
 
 config = {
     'config': Config,
