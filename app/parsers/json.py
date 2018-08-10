@@ -39,9 +39,9 @@ class BlockMarketJson(JsonParser):
                           for currency in current_app.config['CURRENT_LIST']
                           if data.get(currency) is not None}
 
-        self.data = self.get_balance_stat(current_market, current_app.config['BALANCE'])
+        self.data = self._get_balance_stat(current_market, current_app.config['BALANCE'])
 
-    def get_balance_stat(self, current_market, balance):
+    def _get_balance_stat(self, current_market, balance):
         total_earned = 0
         total_cost = 0
         total_balance = {}
