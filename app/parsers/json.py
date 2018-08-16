@@ -36,10 +36,10 @@ class BlockMarketJson(JsonParser):
         dollar_price = float(Dollar.get_data()['美元/人民币(中间价)'])
 
         current_market = {currency: round(dollar_price * float(data[currency]['price']), 2)
-                          for currency in current_app.config['CURRENT_LIST']
+                          for currency in current_app.config['BLOCK_CURRENT_LIST']
                           if data.get(currency) is not None}
 
-        self.data = self._get_balance_stat(current_market, current_app.config['BALANCE'])
+        self.data = self._get_balance_stat(current_market, current_app.config['BLOCK_BALANCE_DATA'])
 
     def _get_balance_stat(self, current_market, balance):
         total_earned = 0
