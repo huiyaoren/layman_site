@@ -34,41 +34,23 @@
         <tbody>
         <tr>
             <td><i class="iconfont table-icon icon-kongqishidu"></i></td>
-            <td>[<span id="val_hud" class="table-value"></span>]</td>
+            <td>[<span id="val_hud" class="table-value">{{ data['湿度'] }}</span>]</td>
             <td><i class="iconfont table-icon icon-richu"></i></td>
-            <td>[<span id="val_sun_on" class="table-value"></span>]</td>
+            <td>[<span id="val_sun_on" class="table-value">{{ data['日出时间'] }}</span>]</td>
             <td><i class="iconfont table-icon icon-riluo"></i></td>
-            <td>[<span id="val_sun_off" class="table-value"></span>]</td>
+            <td>[<span id="val_sun_off" class="table-value">{{ data['日落时间'] }}</span>]</td>
             <td><i class="iconfont table-icon icon-daqiyali"></i></td>
-            <td>[<span id="val_press" class="table-value"></span>]</td>
+            <td>[<span id="val_press" class="table-value">{{ data['气压'] }}</span>]</td>
             <td><i class="iconfont table-icon icon-ziwaixianzhishu"></i></td>
-            <td>[<span id="val_uv" class="table-value"></span>]</td>
+            <td>[<span id="val_uv" class="table-value">{{ data['紫外线'] }}</span>]</td>
             <td><i class="wind iconfont table-icon icon-wind-1"></i></td>
-            <td>[<span id="val_wind" class="table-value"></span>]</td>
+            <td>[<span id="val_wind" class="table-value">{{ data['风级'] }}</span>]</td>
         </tr>
         </tbody>
     </table>
 
     {# block right #}
-    <div style="position: relative">
-        <div style="width: 17.5rem;position: absolute;padding:0.875rem;left: 0;top: 0;">
-{#            <i class="iconfont weather_1" style="font-size: 10rem"></i>#}
-{#            <span class="weather_or" style="font-size: 2rem"></span>#}
-{#            <i class="iconfont weather_2" style="font-size: 5rem"></i>#}
-        </div>
-        <div style="">
-            <span style="font-size: 1.1rem" id="val_weather"></span>
-            <span style="font-size: 1.1rem" id="val_tem_r"></span>
-            <br>
-            <i class="iconfont weather_1" style="font-size: 6rem"></i>
-            <span style="font-size: 6rem;letter-spacing: -0.4rem;" id="val_tem"></span>
-            <br>
-            <span style="font-size: 1.1rem" id="val_time">09:00:55 更新</span>
-        </div>
-    </div>
-</div>
-<script>
-    let weather_list = {
+    {% set weather_list = {
         '晴': 'icon-qing',
         '多云': 'icon-duoyun',
         '阴': 'icon-yintian',
@@ -83,45 +65,24 @@
         '阵雪': 'icon-zhenxue',
         '小雪': 'icon-xiaoxue',
         '大雪': 'icon-daxue',
-    };
-
-    function getWeather() {
-        this._fetchWith("{{ url_for('main.home_data', name='weather', _external=True) }}", {
-            'method': 'GET'
-        }, result => {
-            result = JSON.parse(result);
-            hide('#weather_block');
-
-            qs('#val_tem').innerHTML = result['实时气温'].replace('℃', '°');
-            qs('#val_sun_on').innerHTML = result['日出时间'];
-            qs('#val_sun_off').innerHTML = result['日落时间'];
-            qs('#val_press').innerHTML = result['气压'];
-            qs('#val_tem_r').innerHTML = result['气温'];
-            qs('#val_hud').innerHTML = result['湿度'];
-            qs('#val_uv').innerHTML = result['紫外线'];
-            qs('#val_wind').innerHTML = result['风级'];
-            qs('#val_time').innerHTML = result['发布时间'];
-            qs('#val_weather').innerHTML = result['天气'];
-
-            let wind = result['风级'].replace(/[^0-9]/ig, "");
-            if (wind === 1) {
-                qs('.wind').setAttribute('class', 'iconfont icon-wind-1');
-            } else if (wind === 2) {
-                qs('.wind').setAttribute('class', 'iconfont icon-wind-2');
-            } else if (wind >= 3) {
-                qs('.wind').setAttribute('class', 'iconfont icon-wind-3');
-            }
-
-            let weather = result['天气'].split('转');
-            qs('.weather_1').setAttribute('class', 'iconfont weather_1 ' + weather_list[weather[0]] || '.icon-undefined');
-            if (weather.length === 1) {
-                qs('.weather_or').innerHTML = '';
-            } else if (weather.length === 2) {
-                qs('.weather_or').innerHTML = '/';
-                qs('.weather_2').setAttribute('class', 'iconfont weather_2 ' + weather_list[weather[1]] || '.icon-undefined')
-            }
-
-            show('#weather_block');
-        })
-    }
-</script>
+    } %}
+    {% set weather =  data['天气'].split('转') %}
+    <div style="position: relative">
+        <div style="width: 17.5rem;position: absolute;padding:0.875rem;left: 0;top: 0;">
+            <i class="iconfont weather_1 {{ weather_list[weather[0]] }}" style="font-size: 10rem"></i>
+            {% if weather.length == 2 %}
+                <span class="weather_or" style="font-size: 2rem"></span>
+                <i class="iconfont weather_2" style="font-size: 5rem"></i>
+            {% endif %}
+        </div>
+        <div style="">
+            <span style="font-size: 1.1rem" id="val_weather">{{ data['天气'] }}</span>
+            <span style="font-size: 1.1rem" id="val_tem_r">{{ data['气温'] }}</span>
+            <br>
+            <i class="iconfont weather_1" style="font-size: 6rem"></i>
+            <span style="font-size: 6rem;letter-spacing: -0.4rem;" id="val_tem">{{ data['实时气温'].replace('℃', '°') }}</span>
+            <br>
+            <span style="font-size: 1.1rem" id="val_time">{{ data['发布时间'] }}</span>
+        </div>
+    </div>
+</div>

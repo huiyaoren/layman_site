@@ -42,3 +42,7 @@ def zhihu_daily():
 def btc_balance():
     return json.dumps(parser_data('blockMarket'))
 
+
+@main.route('/home/template/<string:name>')
+def home_template_get(name):
+    return render_template('/home/module/{}.html'.format(name), data=parser_data(name))

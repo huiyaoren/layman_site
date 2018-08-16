@@ -107,7 +107,7 @@
         {#        </div>#}
     </div>
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
-        {% include 'home/module/weather.html' %}
+        <div id="weather"></div>
         <div id="future_weather"></div>
     </div>
     <div class="layui-col-xs12" style="text-align: center">
@@ -120,6 +120,14 @@
 <script src="{{ url_for('static', filename='qrcodejs/jquery.min.js') }}"></script>
 
 <script>
+    function getWeather() {
+        this._fetchWith("{{ url_for('main.home_template_get', name='weather', _external=True) }}", {
+            'method': 'GET'
+        }, result => {
+            qs('#weather').innerHTML = result;
+        })
+    }
+
     function getFutureWeather() {
         this._fetchWith("{{ url_for('main.home_data', name='future_weather', _external=True) }}", {
             'method': 'GET'

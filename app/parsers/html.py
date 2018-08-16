@@ -16,6 +16,7 @@ class Weather(HtmlParser):
             '天气': '//*[@id="wrap"]/div[7]/div[2]/div[1]/div[3]/div/a/text()',
             '气温': '//*[@id="wrap"]/div[7]/div[2]/div[1]/div[3]/div/a/i/text()',
             '发布时间': '//*[@id="wrap"]/div[7]/div[1]/div[2]/text()',
+            '区域': '//*[@id="lastBread"]/text()',
         }
 
     def after_parse(self):
