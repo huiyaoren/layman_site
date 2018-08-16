@@ -12,13 +12,13 @@ logger = logging.getLogger(__name__)
 
 @main.route('/game')
 def index():
-    return render_template('index.html')
+    return render_template('game.html')
 
 
 @main.route('/')
 @main.route('/home')
 def home_center():
-    return render_template('home_center.html')
+    return render_template('home/index.html')
 
 
 @main.route('/home/<name>', methods=['GET'])
@@ -29,16 +29,13 @@ def home_data(name):
 @main.route('/home/future_weather')
 def future_weather():
     data = parser_data('futureWeather')
-    return render_template('home/futureWeather.html', **locals())
+    return render_template('home/module/future_weather.html', **locals())
 
 
 @main.route('/home/zhihu_daily')
 def zhihu_daily():
     data = parser_data('zhihuDaily')
-    return json.dumps({
-        'view': render_template('home/zhihuDaily.html', **locals()),
-        'data': data,
-    })
+    return render_template('home/module/zhihu_daily.html', **locals())
 
 
 @main.route('/home/my_balance')

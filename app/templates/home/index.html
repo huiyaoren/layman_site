@@ -88,11 +88,11 @@
 
 <div class="layui-row">
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
-        {% include 'home_datetime.html' %}
-        {% include 'home_gold.html' %}
-        {% include 'home/dollar.html' %}
-        {% include 'home/blockMarket.html' %}
-        {% include 'home/myBalance.html' %}
+        {% include 'home/module/datetime.html' %}
+        {% include 'home/module/gold.html' %}
+        {% include 'home/module/dollar.html' %}
+        {% include 'home/module/block_market.html' %}
+        {% include 'home/module/my_balance.html' %}
         {#        <div class="layui-tab layui-tab-brief">#}
         {#            <ul class="layui-tab-title">#}
         {#                <li class="">BTC(人民币)</li>#}
@@ -107,7 +107,7 @@
         {#        </div>#}
     </div>
     <div class="layui-col-xs6 layui-col-sm6 layui-col-md6" style="text-align: left">
-        {% include 'home_weather.html' %}
+        {% include 'home/module/weather.html' %}
         <div id="future_weather"></div>
     </div>
     <div class="layui-col-xs12" style="text-align: center">
@@ -133,8 +133,7 @@
             'method': 'GET'
         }, result => {
             hide('#zhihu_daily');
-            result = JSON.parse(result);
-            qs('#zhihu_daily').innerHTML = result['view'];
+            qs('#zhihu_daily').innerHTML = result;
             for (let i in qsa(".qrcode")) {
                 new QRCode(qsa(".qrcode")[i], String(qsa(".daily_page")[i].href));
             }
