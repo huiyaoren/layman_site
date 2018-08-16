@@ -13,9 +13,9 @@ class Weather(HtmlParser):
             '日出时间': '//*[@id="weaLiveInfo"]/ul/li[5]/i/text()',
             '日落时间': '//*[@id="weaLiveInfo"]/ul/li[6]/i/text()',
             '紫外线': '//*[@id="weaLiveInfo"]/ul/li[7]/i/text()',
-            '天气': '//*[@id="wrap"]/div[6]/div[2]/div[1]/div[3]/div/a/text()',
-            '气温': '//*[@id="wrap"]/div[6]/div[2]/div[1]/div[3]/div/a/i/text()',
-            '发布时间': '//*[@id="wrap"]/div[6]/div[1]/div[2]/text()',
+            '天气': '//*[@id="wrap"]/div[7]/div[2]/div[1]/div[3]/div/a/text()',
+            '气温': '//*[@id="wrap"]/div[7]/div[2]/div[1]/div[3]/div/a/i/text()',
+            '发布时间': '//*[@id="wrap"]/div[7]/div[1]/div[2]/text()',
         }
 
     def after_parse(self):
