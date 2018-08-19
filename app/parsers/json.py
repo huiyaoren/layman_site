@@ -65,9 +65,9 @@ class BlockMarketJson(JsonParser):
                 'balance': round(total_balance[i][1], 6),
                 'price': round(old_price, 2),
                 'currentPrice': current_market[i],
-                'earnedPer': round(100 * earned / total_balance[i][0], 2),
+                'earnedPer': round(100 * earned / total_balance[i][0], 1),
                 'earned': round(earned, 2),
-                'influence': round(influence * 100, 2),
+                'influence': round(influence * 100, 1),
             })
 
         total_result = sorted(total_result, key=lambda x: float(x['earnedPer']), reverse=True)
