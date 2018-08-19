@@ -58,6 +58,7 @@ class BlockMarketJson(JsonParser):
             old_price = total_balance[i][0] / total_balance[i][1]
             earned = total_balance[i][1] * (current_market[i] - old_price)
             total_earned += earned
+            influence = abs(earned / (total_balance[i][0] + 100) - earned / total_balance[i][0])
             total_result.append({
                 'CurrencyName': i,
                 'totalCost': total_balance[i][0],
@@ -66,6 +67,7 @@ class BlockMarketJson(JsonParser):
                 'currentPrice': current_market[i],
                 'earnedPer': round(100 * earned / total_balance[i][0], 2),
                 'earned': round(earned, 2),
+                'influence': round(influence * 100, 2),
             })
 
         total_result = sorted(total_result, key=lambda x: float(x['earnedPer']), reverse=True)

@@ -39,6 +39,7 @@
                 str += '<td ' + bg + '>' + result['total_result'][currency]['CurrencyName'] + '</td>';
                 str += '<td ' + bg + ' align="right">¥' + result['total_result'][currency]['currentPrice'] + '</td>';
                 str += '<td ' + bg + ' align="right">' + result['total_result'][currency]['earnedPer'] + '%</td>';
+                str += '<td ' + bg + ' align="right">' + result['total_result'][currency]['influence'] + '%</td>';
                 str += '</tr>';
                 qs('#tbody_balance').innerHTML += str;
             }
