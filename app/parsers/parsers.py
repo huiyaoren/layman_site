@@ -7,6 +7,7 @@ from lxml import etree
 
 class Parser():
     def __init__(self):
+        self.encoding = 'utf8'
         self.xml_parser = etree.HTMLParser(encoding="utf-8")
         self.url = ''
         self.patterns = {}
@@ -20,7 +21,9 @@ class Parser():
         pass
 
     def response_from_url(self, url):
-        return requests.get(url=url, headers=self.headers).text
+        session = requests.get(url=url, headers=self.headers)
+        session.encoding = self.encoding
+        return session.text
 
     def parse_data(self):
         self.parse()
