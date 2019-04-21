@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './index.css'
+import $ from 'jquery';
 
 const weather_list = {
     '晴': 'icon-qing',
@@ -28,22 +29,38 @@ class Weather extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5001/api/weather')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log('result', result)
-                    this.setState({
-                        data: result,
-                    })
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    })
-                }
-            )
+        // fetch('http://localhost:5001/api/weather')
+        //     .then(res => res.json())
+        //     .then(
+        //         (result) => {
+        //             console.log('result', result)
+        //             this.setState({
+        //                 data: result,
+        //             })
+        //         },
+        //         (error) => {
+        //             this.setState({
+        //                 isLoaded: true,
+        //                 error
+        //             })
+        //         }
+        //     )
+        $.ajax({
+            url: 'http://192.168.50.17:5001/api/weather',
+            type: 'get',
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            cache: false,
+            crossDomain: true,
+            success: function (data) {
+                this.setState({data: data})   // 注意这里
+            }.bind(this),
+            error: function (xhr, status, err) {
+                alert(JSON.stringify(xhr))
+                console.error(this.props.url, status, err.toString())
+            }.bind(this)
+        })
+        return false
     }
 
 

@@ -1,3 +1,27 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.875rem;
+}
+
+html {
+    font-size: 1.5625vw;
+}
+
+body {
+    padding: 1rem;
+    background: #282c34;
+    font-family: 'Microsoft Yahei', 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    height: 100%;
+    overflow: hidden;
+}
+
 .App {
   text-align: center;
 }
