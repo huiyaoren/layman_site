@@ -52,3 +52,9 @@ def home_template_get(name):
 def home_template_get_1():
     data = parser_data('weather')
     return json.dumps(data)
+
+
+@main.route('/api/<string:name>')
+def home_api_data(name):
+    data = parser_data(name)
+    return json.dumps(data)
