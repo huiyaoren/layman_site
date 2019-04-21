@@ -24,11 +24,11 @@ class Weather extends Component {
         super(props)
         this.state = {
             data: {},
-            weather: ''
         }
     }
 
-    componentDidMount() {
+
+    fetch_data() {
         // fetch('http://localhost:5001/api/weather')
         //     .then(res => res.json())
         //     .then(
@@ -53,6 +53,7 @@ class Weather extends Component {
             cache: false,
             crossDomain: true,
             success: function (data) {
+                alert('suceess')
                 this.setState({data: data})   // 注意这里
             }.bind(this),
             error: function (xhr, status, err) {
@@ -60,7 +61,17 @@ class Weather extends Component {
                 console.error(this.props.url, status, err.toString())
             }.bind(this)
         })
-        return false
+    }
+
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+
+
+    componentDidMount() {
+        this.fetch_data()
+        this.interval = setInterval(() => this.fetch_data(), 100 * 1000)
     }
 
 
@@ -69,9 +80,9 @@ class Weather extends Component {
         const weather = data['天气'] && data['天气'].split('转') || ''
 
         return (
-            <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '15px'}}>
-                <div id="weather_block" style={{'transition': 'opacity 1s'}}>
-                    <table className="layui-table" style={{'backgroundColor': 'rgba(0,0,0,0)'}}>
+            <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '15px', transition: 'opacity 1s'}}>
+                <div id="weather_block">
+                    <table className="layui-table">
                         <tbody>
                         <tr>
                             <td><i className="iconfont table-icon icon-kongqishidu"> </i></td>
@@ -109,6 +120,7 @@ class Weather extends Component {
                         <div >
                             <span style={{'fontSize': '1.1rem'}} id="val_weather">{data['天气']}</span>
                             <span style={{'fontSize': '1.1rem'}} id="val_tem_r">{data['气温']}</span>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <br/>
                             <i className="iconfont weather_1" style={{'fontSize': '6rem'}}> </i>
                             <span style={{'fontSize': '6rem', 'letterSpacing': '-0.4rem'}}
