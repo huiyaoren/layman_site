@@ -1,6 +1,6 @@
-Flask==0.12.2
-Flask-Login==0.4.0
-Flask-SQLAlchemy==2.2
-Flask-WTF==0.14.2
-lxml==4.2.1
-requests==2.18.4
+Flask
+Flask-Login
+Flask-SQLAlchemy
+Flask-WTF
+lxml
+requests
