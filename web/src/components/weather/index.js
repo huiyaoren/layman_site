@@ -53,7 +53,6 @@ class Weather extends Component {
             cache: false,
             crossDomain: true,
             success: function (data) {
-                alert('suceess')
                 this.setState({data: data})   // 注意这里
             }.bind(this),
             error: function (xhr, status, err) {

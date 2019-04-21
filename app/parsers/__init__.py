@@ -18,4 +18,9 @@ parsers = {
     'dollar': Dollar,
     'futureWeather': FutureWeather,
     'zhihuDaily': ZhihuDaily,
+
+    'block_market': BlockMarketJson,
+    'future_weather': FutureWeather,
+    'zhihu_daily': ZhihuDaily,
 }
+
