@@ -46,3 +46,9 @@ def btc_balance():
 @main.route('/home/template/<string:name>')
 def home_template_get(name):
     return render_template('/home/module/{}.html'.format(name), data=parser_data(name))
+
+
+@main.route('/api/weather')
+def home_template_get_1():
+    data = parser_data('weather')
+    return json.dumps(data)
