@@ -4,6 +4,7 @@ from .parsers import HtmlParser
 class Weather(HtmlParser):
     def set_config(self):
         self.location = 'FuZhou'
+        self.encoding = 'gbk'
         self.url = 'http://tianqi.2345.com/fuzhou/58847.htm'
         self.patterns = {
             '实时气温': '//*[@id="weaLiveInfo"]/ul/li[1]/i/text()',
