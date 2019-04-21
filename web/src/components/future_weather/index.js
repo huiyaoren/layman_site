@@ -48,11 +48,11 @@ class FutureWeather extends Component {
 
         return (
             <div style={{
-                width: '30vw',
+                width: '40vw',
                 position: 'absolute',
+                top: '14rem',
                 right: 0,
-                top: 0,
-                padding: '15px',
+                padding: '1rem',
                 transition: 'opacity 1s'
             }}>
                 <table className="layui-table">

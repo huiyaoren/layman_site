@@ -79,7 +79,7 @@ class Weather extends Component {
         const weather = data['天气'] && data['天气'].split('转') || ''
 
         return (
-            <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '15px', transition: 'opacity 1s'}}>
+            <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '1rem', transition: 'opacity 1s'}}>
                 <div id="weather_block">
                     <table className="layui-table">
                         <tbody>
