@@ -48,7 +48,7 @@ class FutureWeather extends Component {
 
         return (
             <div style={{
-                width: '40vw',
+                width: '35vw',
                 position: 'absolute',
                 top: '14rem',
                 right: 0,
@@ -61,9 +61,9 @@ class FutureWeather extends Component {
                         if (index < 10) {
                             return (
                                 <tr style={{opacity: 1 - index * 0.0875}}>
-                                    <td style={{fontSize: '1.125rem'}}>{item['dt_txt']}</td>
-                                    <td style={{fontSize: '1.125rem'}}>{item['description']}</td>
-                                    <td style={{fontSize: '1.125rem'}}>{item['temp']}°</td>
+                                    <td>{item['dt_txt']}</td>
+                                    <td>{item['description']}</td>
+                                    <td>{item['temp']}°</td>
                                 </tr>
                             )
                         }

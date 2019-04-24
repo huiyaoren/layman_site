@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import './index.css'
-import $ from 'jquery'
 
 
 class Datetime extends Component {
@@ -26,7 +25,7 @@ class Datetime extends Component {
 
     componentDidMount() {
         this.fetch_data()
-        this.interval = setInterval(() => this.fetch_data(), 60 * 1000)
+        this.interval = setInterval(() => this.fetch_data(), 10 * 1000)
     }
 
     getDay = () => {

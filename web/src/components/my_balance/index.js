@@ -44,25 +44,6 @@ class MyBalance extends Component {
         this.interval = setInterval(() => this.fetch_data(), 600 * 1000)
     }
 
-    getMyBalance(result) {
-        result['total_result'].map((currency, index) => {
-            let style
-            if (parseFloat(result['total_result'][currency]['earnedPer']) > 0) {
-                style = {backgroundColor: 'white', color: '#282c34'}
-            } else {
-                style = {backgroundColor: '#282c34', color: 'white'}
-            }
-            return (
-                <tr>
-                    <td style={style}>{result['total_result'][currency]['CurrencyName']}</td>
-                    <td style={style} align="right">¥{result['total_result'][currency]['currentPrice']}</td>
-                    <td style={style} align="right">{result['total_result'][currency]['earnedPer']}%</td>
-                    <td style={style} align="right">{result['total_result'][currency]['influence']}%</td>
-                </tr>
-            )
-        })
-    }
-
 
     render() {
         const {data} = this.state
@@ -70,7 +51,7 @@ class MyBalance extends Component {
 
         return (
             <div style={{
-                width: '30vw',
+                width: '35vw',
                 position: 'absolute',
                 top: '14.5rem',
                 left: 0,
@@ -78,8 +59,8 @@ class MyBalance extends Component {
                 transition: 'opacity 1s'
             }}>
                 <div >
-                    <table id="table_balance" className="layui-table">
-                        <tbody id="tbody_balance">
+                    <table  className="layui-table">
+                        <tbody >
                         {result['total_result'].map((item) => {
                             let style
                             if (parseFloat(item['earnedPer']) > 0) {
@@ -103,7 +84,7 @@ class MyBalance extends Component {
                     </table>
                 </div>
                 <div >
-                    <span id="total_earned">'区块链总收益率: {(result['total_earned'] * 100 / result['total_cost']).toFixed(2)}%</span>
+                    <span id="total_earned">区块链总收益率: {(result['total_earned'] * 100 / result['total_cost']).toFixed(2)}%</span>
                     <button type="button"
                             style={{background: 'white', color: 'black', padding: '0.1rem', margin: '0.5rem'}}
                             onClick={this.fetch_data}>更新

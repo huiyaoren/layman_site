@@ -11,8 +11,8 @@ class App extends Component {
   render() {
       return (
           <>
-          {/*<Weather/>*/}
-          {/*<FutureWeather/>*/}
+          <Weather/>
+          <FutureWeather/>
           <Datetime/>
           <Gold/>
           <MyBalance/>
