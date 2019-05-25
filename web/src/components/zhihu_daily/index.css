@@ -1,0 +1,25 @@
+.zhihu-table img {
+    width: 6rem;
+    height: 6rem;
+}
+
+.zhihu-table tr {
+    transition: width 2s;
+    height: 6rem;
+    text-align: center;
+}
+
+.zhihu-table-title {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.zhihu-mask {
+    position: absolute;
+    top: 0;
+    height: 20rem;
+    z-index: 1;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0),  #282c34);
+}
+

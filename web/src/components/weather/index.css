@@ -1,5 +1,5 @@
 .layui-table td, .layui-table th {
-    padding: 0.1rem 0;
+    padding: 0 0;
     font-size: 0.875rem;
 }
 
@@ -24,5 +24,5 @@
 }
 
 .layui-table, .layui-table-view {
-    margin: 0 0 0.625rem 0;
+    margin: 0 0 0.5rem 0;
 }

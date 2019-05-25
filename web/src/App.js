@@ -6,6 +6,7 @@ import FutureWeather from './components/future_weather/index';
 import Datetime from './components/datetime/index';
 import Gold from './components/gold/index';
 import MyBalance from './components/my_balance/index';
+import ZhihuDaily from './components/zhihu_daily/index';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Datetime/>
           <Gold/>
           <MyBalance/>
+          <ZhihuDaily/>
           </>
       );
   }
