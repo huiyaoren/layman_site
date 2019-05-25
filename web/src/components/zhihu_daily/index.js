@@ -63,7 +63,7 @@ class ZhihuDaily extends Component {
         let _ = []
         for (let i = 0; i < 30; i++) {
             _.push(
-                <tr className="zhihu-table-tr">
+                <tr key={i} className="zhihu-table-tr">
                     {i % 2 === 0 ? (
                         <td><img src={data['image'][i]} alt=""/></td>
                     ) : (

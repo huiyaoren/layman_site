@@ -60,8 +60,8 @@ class MyBalance extends Component {
             }}>
                 <div >
                     <table  className="layui-table">
-                        <tbody >
-                        {result['total_result'].map((item) => {
+                        <tbody>
+                        {result['total_result'].map((item, index) => {
                             let style
                             if (parseFloat(item['earnedPer']) > 0) {
                                 style = {backgroundColor: 'white', color: '#282c34'}
@@ -69,7 +69,7 @@ class MyBalance extends Component {
                                 style = {backgroundColor: '#282c34', color: 'white'}
                             }
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <td style={style}>{item['CurrencyName']}</td>
                                     <td style={style} align="right">
                                         ¥{item['currentPrice']}</td>

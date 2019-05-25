@@ -60,7 +60,7 @@ class FutureWeather extends Component {
                     {data.map((item, index) => {
                         if (index < 10) {
                             return (
-                                <tr style={{opacity: 1 - index * 0.0875}}>
+                                <tr key={index} style={{opacity: 1 - index * 0.0875}}>
                                     <td>{item['dt_txt']}</td>
                                     <td>{item['description']}</td>
                                     <td>{item['temp']}°</td>
