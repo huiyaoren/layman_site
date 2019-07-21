@@ -58,14 +58,13 @@ class BlockMarket(HtmlParser):
 
 class Dollar(HtmlParser):
     def set_config(self):
-        self.url = 'http://www.currencydo.com/'
+        self.url = 'http://hl.anseo.cn/rate_USD.aspx'
         self.patterns = {
-            '美元/人民币(中间价)': '//*[@id="worldBanks"]/tbody/tr[26]/td[2]/text()',
+            '美元/人民币(中间价)': "/html/body/div[@id='currency']/div[@id='result']/div[@id='rates']/ul/li[@class='ev'][1]/text()"
         }
 
     def after_parse(self):
-        self.data['美元/人民币(中间价)'] = round(float(self.data['美元/人民币(中间价)']) / 100, 2)
-
+        self.data['美元/人民币(中间价)'] = float(self.data['美元/人民币(中间价)'][0].split('1 美元 = ')[1].strip())
 
 class ZhihuDaily(HtmlParser):
     def set_config(self):
@@ -79,3 +78,15 @@ class ZhihuDaily(HtmlParser):
     def after_parse(self):
         for k, i in enumerate(self.data['page']):
             self.data['page'][k] = 'https://daily.zhihu.com{0}'.format(i)
+
+
+# class LativSession(HtmlParser):
+#     def set_config(self):
+#         self.url = 'https://www.lativ.com/MEN'
+#         self.patterns = {
+#             'title': '//*[@id="sidenav"]/ul/li/ul/li/a/text()',
+#             'url': '//*[@id="sidenav"]/ul/li/ul/li/a/@href',
+#         }
+#
+#     def after_parse(self):
+#         self.data
