@@ -39,7 +39,7 @@ class Datetime extends Component {
         month = Number(month) + 1
         month = month < 10 ? '0' + month : month
         this.setState({
-            day: '[ ' + weekday + ' ]' + '  ' + year + ' 年 ' + month + ' 月 ' + date + ' 日 '
+            day: `[${weekday}] ${year} 年 ${month} 月 ${date} 日`
         })
     }
 
@@ -47,10 +47,8 @@ class Datetime extends Component {
         let time = new Date()
         let hour = time.getHours()
         let minutes = time.getMinutes()
-        let second = time.getSeconds()
         hour = hour < 10 ? '0' + hour : hour
         minutes = minutes < 10 ? '0' + minutes : minutes
-        second = second < 10 ? '0' + second : second
         this.setState({
             time: hour + ':' + minutes
         })

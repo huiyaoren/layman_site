@@ -87,7 +87,7 @@ class Weather extends Component {
 
     render() {
         const {data} = this.state
-        const weather = data['天气'] && data['天气'].split('转') || ''
+        const weather = (data['天气'] && data['天气'].split('转')) || ''
 
         return (
             <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '1rem', transition: 'opacity 1s'}}>

@@ -70,6 +70,7 @@ class FutureWeather extends Component {
                                     </tr>
                                 )
                             }
+                            return null
                         })
                     }
                     </tbody>
