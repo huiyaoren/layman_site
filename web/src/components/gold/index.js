@@ -7,7 +7,7 @@ class Gold extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
+            data: {'账户黄金(人民币)': '2XX'},
         }
     }
 
@@ -25,8 +25,7 @@ class Gold extends Component {
                 this.setState({data: data})   // 注意这里
             }.bind(this),
             error: function (xhr, status, err) {
-                alert(JSON.stringify(xhr))
-                console.error(this.props.url, status, err.toString())
+                console.log([this.props.url, status, err.toString(), JSON.stringify(xhr)])
             }.bind(this)
         })
     }
@@ -59,7 +58,7 @@ class Gold extends Component {
                     <tbody>
                     <tr>
                         <td>账户黄金(人民币):</td>
-                        <td><span id="val_gold" style={{fontSize: '2.5rem'}}> {'¥' + data['账户黄金(人民币)']} </span></td>
+                        <td><span id="val_gold" style={{fontSize: '2.5rem'}}> {'¥ ' + data['账户黄金(人民币)']} </span></td>
                         <td> </td>
                         <td> </td>
                     </tr>

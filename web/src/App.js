@@ -9,7 +9,7 @@ import MyBalance from './components/my_balance/index';
 import ZhihuDaily from './components/zhihu_daily/index';
 
 class App extends Component {
-  render() {
+  render = () => {
       return (
           <>
           <Weather/>

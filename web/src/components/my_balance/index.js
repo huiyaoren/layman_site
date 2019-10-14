@@ -8,7 +8,14 @@ class MyBalance extends Component {
         super(props)
         this.state = {
             data: {
-                total_result: [],
+                total_earned: 1,
+                total_cost: 1,
+                total_result: new Array(10).fill({
+                    earnedPer: '10.00',
+                    CurrencyName: 'BTC',
+                    currentPrice: '1000.0000',
+                    influence: '1.00',
+                }),
             },
         }
     }
@@ -27,7 +34,7 @@ class MyBalance extends Component {
                 this.setState({data: data})   // 注意这里
             }.bind(this),
             error: function (xhr, status, err) {
-                alert(JSON.stringify(xhr))
+                // alert(JSON.stringify(xhr))
                 console.error(this.props.url, status, err.toString())
             }.bind(this)
         })
@@ -59,7 +66,7 @@ class MyBalance extends Component {
                 transition: 'opacity 1s'
             }}>
                 <div >
-                    <table  className="layui-table">
+                    <table>
                         <tbody>
                         {result['total_result'].map((item, index) => {
                             let style
@@ -84,7 +91,7 @@ class MyBalance extends Component {
                     </table>
                 </div>
                 <div >
-                    <span id="total_earned">区块链总收益率: {(result['total_earned'] * 100 / result['total_cost']).toFixed(2)}%</span>
+                    <span>区块链总收益率: {(result['total_earned'] * 100 / result['total_cost']).toFixed(2)}%</span>
                     <button type="button"
                             style={{background: 'white', color: 'black', padding: '0.1rem', margin: '0.5rem'}}
                             onClick={this.fetch_data}>更新

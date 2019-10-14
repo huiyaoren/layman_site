@@ -23,7 +23,18 @@ class Weather extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: {},
+            data: {
+                '湿度': '未知',
+                '日出时间': '未知',
+                '日落时间': '未知',
+                '气压': '未知',
+                '紫外线': '未知',
+                '风级': '未知',
+                '天气': '多云',
+                '气温': ' 25℃',
+                '实时气温': '23℃',
+                '发布时间': '发布于 00:00:00',
+            },
         }
     }
 
@@ -56,7 +67,7 @@ class Weather extends Component {
                 this.setState({data: data})   // 注意这里
             }.bind(this),
             error: function (xhr, status, err) {
-                alert(JSON.stringify(xhr))
+                // alert(JSON.stringify(xhr))
                 console.error(this.props.url, status, err.toString())
             }.bind(this)
         })

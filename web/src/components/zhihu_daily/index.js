@@ -8,7 +8,12 @@ class ZhihuDaily extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
+            data: {
+                image: new Array(30).fill('http://lorempixel.com/200/200'),
+                qrcode_url: new Array(30).fill('http://lorempixel.com/200/200'),
+                title: new Array(30).fill('XXXXXX-XXXXXXXXXXXXXXXXXX'),
+                page: new Array(30).fill('X'),
+            }
         }
     }
 
@@ -34,7 +39,7 @@ class ZhihuDaily extends Component {
                 })
             }.bind(this),
             error: function (xhr, status, err) {
-                alert(JSON.stringify(xhr))
+                // alert(JSON.stringify(xhr))
                 console.error(this.props.url, status, err.toString())
             }.bind(this)
         })
