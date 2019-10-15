@@ -66,7 +66,7 @@ class Datetime extends Component {
                 padding: '1rem',
                 transition: 'opacity 1s'
             }}>
-                <div id="data_day" style={{fontSize:'1.125rem'}}>{day}</div>
+                <div id="data_day" style={{fontSize:'1.125rem', marginLeft: '3rem'}}>{day}</div>
                 <div id="data_time" style={{fontSize:'8rem'}}>{time}</div>
             </div>
         )

@@ -91,11 +91,11 @@ class ZhihuDaily extends Component {
                           cellSpacing={30}
                           slideWidth={0.95}
                           autoplayInterval={60000}
+                          dots={false}
                 >
                     {this.renderItem(data)}
                 </Carousel>
             </div>
-
         )
     }
 }

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import constants from '../common/constants'
+import config from '../common/config'
 
 const helper = {
     log: (contents) => {
@@ -7,7 +7,7 @@ const helper = {
     },
     request: (obj) => {
         obj = Object.assign({
-            url: `${constants.server_host}${obj.uri}`,
+            url: `${config.server_host}${obj.uri}`,
             type: 'get',
             dataType: "json",
             contentType: "application/json;charset=utf-8",
@@ -18,7 +18,7 @@ const helper = {
             }
         }, obj)
         $.ajax(obj)
-    }
+    },
 }
 
 export default helper

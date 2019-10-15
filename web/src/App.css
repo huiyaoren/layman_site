@@ -16,7 +16,7 @@ html {
 
 body {
     padding: 1rem;
-    background: #282c34;
+    background: #282c34!important;
     font-family: 'Microsoft Yahei', 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
     height: 100%;
     overflow: hidden;
