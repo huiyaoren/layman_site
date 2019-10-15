@@ -2,22 +2,22 @@ import React, {Component} from 'react'
 import './index.css'
 import $ from 'jquery'
 import QRCode from 'qrcode'
-
+import {Carousel} from 'antd-mobile';
 
 class ZhihuDaily extends Component {
     constructor(props) {
         super(props)
         this.state = {
             data: {
-                image: new Array(30).fill('http://lorempixel.com/200/200'),
-                qrcode_url: new Array(30).fill('http://lorempixel.com/200/200'),
+                image: new Array(30).fill('https://picsum.photos/100/100'),
+                qrcode_url: new Array(30).fill('https://picsum.photos/100/100'),
                 title: new Array(30).fill('XXXXXX-XXXXXXXXXXXXXXXXXX'),
                 page: new Array(30).fill('X'),
-            }
+            },
         }
     }
 
-    fetch_data = ()=> {
+    fetch_data = () => {
         $.ajax({
             url: 'http://192.168.50.17:5001/api/zhihu_daily',
             type: 'get',
@@ -39,7 +39,6 @@ class ZhihuDaily extends Component {
                 })
             }.bind(this),
             error: function (xhr, status, err) {
-                // alert(JSON.stringify(xhr))
                 console.error(this.props.url, status, err.toString())
             }.bind(this)
         })
@@ -53,56 +52,61 @@ class ZhihuDaily extends Component {
     componentDidMount() {
         this.fetch_data()
         this.interval_data = setInterval(() => this.fetch_data(), 1800 * 1000)
-        this.interval_scroll = setInterval(() => {
-            let table = document.querySelector('.zhihu-table')
-            let t = Number(table.style.top.replace('rem', ''))
-            if (t + 6 * document.querySelectorAll('.zhihu-table-tr').length <= 20) {
-                table.style.top = '0rem'
-            } else {
-                table.style.top = (t - 6) + 'rem'
-            }
-        }, 30 * 1000)
     }
 
+
     renderItem = (data) => {
-        let _ = []
-        for (let i = 0; i < 30; i++) {
-            _.push(
-                <tr key={i} className="zhihu-table-tr">
-                    {i % 2 === 0 ? (
-                        <td><img src={data['image'][i]} alt=""/></td>
-                    ) : (
-                        <td className="qrcode"><img src={data['qrcode_url'][i]} alt=""/></td>
-                    )}
-                    <td className="zhihu-table-title" style={{fontSize: '1.875rem'}}>
-                        <a href={data['page'][i]}> </a>{data['title'][i]}
-                    </td>
-                    {i % 2 === 0 ? (
-                        <td className="qrcode"><img src={data['qrcode_url'][i]} alt=""/></td>
-                    ) : (
-                        <td><img src={data['image'][i]} alt=""/></td>
-                    )}
-                </tr>
+        const range = new Array(30).fill(null)
+        console.log('range', range)
+        return range.map((val, index) => {
+            console.log(index)
+            return (
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <img
+                        src={data['image'][index]}
+                        alt=""
+                        style={{width: '15%'}}
+                    />
+                    <span style={{
+                        width: '70%',
+                        display: 'inline-block',
+                        fontSize: '1.875rem',
+                        textAlign: 'center'
+                    }}>{data['title'][index]}</span>
+                    <img
+                        src={data['qrcode_url'][index]}
+                        alt=""
+                        style={{width: '15%'}}
+                    />
+                </div>
             )
-        }
-        return _
+        })
     }
 
     render() {
         const {data} = this.state
-
         return (
-            <div style={{width: '100vw',position: 'absolute', bottom: 0, right: 0, padding: '0', transition: 'opacity 1s'}}>
-                <div style={{width: '100vw',height: '16.5rem', overflow: 'hidden', position: 'relative'}}>
-                    <table id="" className="zhihu-table"
-                           style={{position: 'absolute', top: '0rem', transition: 'top 2s', padding:'1rem'}}>
-                        <tbody id="">
-                        {data.image && this.renderItem(data)}
-                        </tbody>
-                    </table>
-                    <div className="zhihu-mask"></div>
-                </div>
+            <div style={{
+                width: '100vw',
+                position: 'absolute',
+                bottom: '1rem',
+                right: 0,
+                overflow: 'hidden',
+            }}>
+
+                <Carousel autoplay infinite
+                          frameOverflow="visible"
+                          cellSpacing={30}
+                          slideWidth={0.95}
+                >
+                    {this.renderItem(data)}
+                </Carousel>
             </div>
+
         )
     }
 }
