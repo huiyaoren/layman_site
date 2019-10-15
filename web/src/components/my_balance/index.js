@@ -21,12 +21,12 @@ class MyBalance extends Component {
     }
 
 
-    fetch_data() {
+    fetch_data = () => {
         helper.request({
             uri: '/api/block_market',
-            success: function (data) {
+            success: (data) => {
                 this.setState({data: data})   // 注意这里
-            }.bind(this),
+            },
         })
     }
 
