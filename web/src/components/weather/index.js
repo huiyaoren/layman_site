@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './index.css'
-import $ from 'jquery';
+import helper from '../../utils/index'
 
 const weather_list = {
     '晴': 'icon-qing',
@@ -40,36 +40,11 @@ class Weather extends Component {
 
 
     fetch_data() {
-        // fetch('http://localhost:5001/api/weather')
-        //     .then(res => res.json())
-        //     .then(
-        //         (result) => {
-        //             console.log('result', result)
-        //             this.setState({
-        //                 data: result,
-        //             })
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             })
-        //         }
-        //     )
-        $.ajax({
-            url: 'http://192.168.50.17:5001/api/weather',
-            type: 'get',
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            cache: false,
-            crossDomain: true,
+        helper.request({
+            uri: '/api/weather',
             success: function (data) {
                 this.setState({data: data})   // 注意这里
             }.bind(this),
-            error: function (xhr, status, err) {
-                // alert(JSON.stringify(xhr))
-                console.error(this.props.url, status, err.toString())
-            }.bind(this)
         })
     }
 
@@ -90,7 +65,14 @@ class Weather extends Component {
         const weather = (data['天气'] && data['天气'].split('转')) || ''
 
         return (
-            <div style={{width: '50vw', position: 'absolute', right: 0, top:0, padding: '1rem', transition: 'opacity 1s'}}>
+            <div style={{
+                width: '50vw',
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                padding: '1rem',
+                transition: 'opacity 1s'
+            }}>
                 <div id="weather_block">
                     <table className="layui-table">
                         <tbody>

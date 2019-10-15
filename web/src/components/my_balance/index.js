@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './index.css'
-import $ from 'jquery'
+import helper from '../../utils/index'
 
 
 class MyBalance extends Component {
@@ -22,21 +22,11 @@ class MyBalance extends Component {
 
 
     fetch_data() {
-        $.ajax({
-            url: 'http://192.168.50.17:5001/api/block_market',
-            type: 'get',
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            cache: false,
-            crossDomain: true,
+        helper.request({
+            uri: '/api/block_market',
             success: function (data) {
-                console.log(data)
                 this.setState({data: data})   // 注意这里
             }.bind(this),
-            error: function (xhr, status, err) {
-                // alert(JSON.stringify(xhr))
-                console.error(this.props.url, status, err.toString())
-            }.bind(this)
         })
     }
 

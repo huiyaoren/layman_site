@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './index.css'
-import $ from 'jquery'
+import helper from '../../utils/index'
 
 class FutureWeather extends Component {
     constructor(props) {
@@ -16,20 +16,13 @@ class FutureWeather extends Component {
 
 
     fetch_data() {
-        $.ajax({
-            url: 'http://192.168.50.17:5001/api/future_weather',
+        helper.request({
+            uri: '/api/future_weather',
             type: 'get',
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            cache: false,
-            crossDomain: true,
             success: function (data) {
-                console.log(data)
-                this.setState({data: data})   // 注意这里
+                helper.log(data)
+                this.setState({data: data})
             }.bind(this),
-            error: function (xhr, status, err) {
-                console.log([this.props.url, status, err.toString(), JSON.stringify(xhr)])
-            }.bind(this)
         })
     }
 

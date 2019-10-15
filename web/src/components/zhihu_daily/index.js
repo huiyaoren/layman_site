@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import './index.css'
-import $ from 'jquery'
 import QRCode from 'qrcode'
 import {Carousel} from 'antd-mobile';
+import helper from '../../utils/index'
 
 class ZhihuDaily extends Component {
     constructor(props) {
@@ -18,15 +18,9 @@ class ZhihuDaily extends Component {
     }
 
     fetch_data = () => {
-        $.ajax({
-            url: 'http://192.168.50.17:5001/api/zhihu_daily',
-            type: 'get',
-            dataType: "json",
-            contentType: "application/json;charset=utf-8",
-            cache: false,
-            crossDomain: true,
+        helper.request({
+            uri: '/api/zhihu_daily',
             success: function (data) {
-                console.log(data)
                 data['qrcode_url'] = []
                 this.setState({data: data}, () => {
                     for (let i = 0; i < 30; i++) {
@@ -38,15 +32,11 @@ class ZhihuDaily extends Component {
                     }
                 })
             }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString())
-            }.bind(this)
         })
     }
 
     componentWillUnmount() {
         clearInterval(this.interval_data)
-        clearInterval(this.interval_scroll)
     }
 
     componentDidMount() {
@@ -57,9 +47,7 @@ class ZhihuDaily extends Component {
 
     renderItem = (data) => {
         const range = new Array(30).fill(null)
-        console.log('range', range)
         return range.map((val, index) => {
-            console.log(index)
             return (
                 <div style={{
                     display: 'flex',
@@ -102,6 +90,7 @@ class ZhihuDaily extends Component {
                           frameOverflow="visible"
                           cellSpacing={30}
                           slideWidth={0.95}
+                          autoplayInterval={60000}
                 >
                     {this.renderItem(data)}
                 </Carousel>
