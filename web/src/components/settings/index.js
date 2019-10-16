@@ -1,31 +1,61 @@
 import React, {Component} from 'react'
 import './index.css'
-import {Drawer, List, NavBar, Icon, Flex} from 'antd-mobile'
-import {WingBlank, WhiteSpace, Button} from 'antd-mobile';
+import {Drawer, List, NavBar, Icon, InputItem, Form} from 'antd-mobile'
+import {WhiteSpace} from 'antd-mobile';
+import {createForm} from 'rc-form';
+import storage from '../../utils/storage'
+
 class Settings extends Component {
     state = {
         open: false,
     }
     onOpenChange = (...args) => {
-        console.log(args);
-        this.setState({open: !this.state.open});
+        console.log(args)
+        this.setState({open: !this.state.open})
+    }
+
+    handleClick = () => {
+        this.inputRef.focus()
     }
 
     render() {
-
+        const {getFieldProps} = this.props.form;
         // fix in codepen
-        const sidebar = (<List>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i, index) => {
-                if (index === 0) {
-                    return (
-                        <NavBar icon={<Icon type="ellipsis"/>} onLeftClick={this.onOpenChange}>Basic</NavBar>
-                    );
-                }
-                return (<List.Item key={index}
-                                   thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-                >Category{index}</List.Item>);
-            })}
-        </List>);
+        const sidebar = (
+            <div style={{width: '50vw', boxShadow: '-5PX 0PX 5px 0px white'}}>
+                <NavBar
+                    style={{background: 'black', width: '100%'}}
+                    icon={<Icon style={{fill: 'white'}} type="left"/>}
+                    onClick={this.onOpenChange}
+                >
+                    设置
+                </NavBar>
+                <List renderHeader={() => 'Common'}>
+                    <InputItem
+                        {...getFieldProps('server_host', {
+                            initialValue:storage.load('server_host') || '',
+                            normalize: (value) => {
+                                storage.set('server_host', value)
+                                return value
+                            }
+                        })}
+                        clear
+                        placeholder="Server Host"
+                        // onChange={value => {
+                        // }}
+                        ref={el => this.autoFocusInst = el}
+                    >Server</InputItem>
+                    <List.Item>
+                        <div
+                            style={{width: '100%', color: '#108ee9', textAlign: 'center'}}
+                            onClick={this.handleClick}
+                        >
+                            click to focus
+                        </div>
+                    </List.Item>
+                </List>
+            </div>
+        )
 
         return (
             <div style={{
@@ -43,11 +73,11 @@ class Settings extends Component {
                     open={this.state.open}
                     onOpenChange={this.onOpenChange}
                 >
-                    <NavBar style={{background: 'white'}}  onClick={this.onOpenChange}><Icon style={{fill: 'black'}} type="ellipsis"/></NavBar>
+                    <NavBar style={{background: 'white'}} onClick={this.onOpenChange}><Icon style={{fill: 'black'}} type="ellipsis"/></NavBar>
                 </Drawer>
             </div>
         )
     }
 }
-
+Settings = createForm()(Settings);
 export default Settings

@@ -8,6 +8,7 @@ import Gold from './components/gold/index';
 import MyBalance from './components/my_balance/index';
 import ZhihuDaily from './components/zhihu_daily/index';
 import Settings from './components/settings/index'
+import Background from './components/background/index'
 import 'antd-mobile/dist/antd-mobile.css'
 
 class App extends Component {
@@ -20,7 +21,8 @@ class App extends Component {
             <Gold/>
             <MyBalance/>
             <ZhihuDaily/>
-            <Settings>123</Settings>
+            <Settings/>
+            <Background/>
             </>
         );
     }
