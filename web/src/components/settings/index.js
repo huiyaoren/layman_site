@@ -15,7 +15,8 @@ class Settings extends Component {
     }
 
     handleClick = () => {
-        this.inputRef.focus()
+        // this.inputRef.focus()
+        window.location.reload();
     }
 
     render() {
@@ -50,7 +51,7 @@ class Settings extends Component {
                             style={{width: '100%', color: '#108ee9', textAlign: 'center'}}
                             onClick={this.handleClick}
                         >
-                            click to focus
+                            应用设置
                         </div>
                     </List.Item>
                 </List>
