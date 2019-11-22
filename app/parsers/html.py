@@ -66,6 +66,7 @@ class Dollar(HtmlParser):
     def after_parse(self):
         self.data['美元/人民币(中间价)'] = float(self.data['美元/人民币(中间价)'][0].split('1 美元 = ')[1].strip())
 
+
 class ZhihuDaily(HtmlParser):
     def set_config(self):
         self.url = 'https://daily.zhihu.com/'

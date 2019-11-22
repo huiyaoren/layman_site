@@ -6,8 +6,9 @@ const helper = {
         console.log(...contents)
     },
     request: (obj) => {
+        const host = config.server_host.startsWith('http://') ? config.server_host : `http://${config.server_host}`
         obj = Object.assign({
-            url: `${config.server_host}${obj.uri}`,
+            url: `${host}${obj.uri}`,
             type: 'get',
             dataType: "json",
             contentType: "application/json;charset=utf-8",
