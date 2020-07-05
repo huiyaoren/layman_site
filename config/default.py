@@ -15,3 +15,5 @@ class DefaultConfig(Config, BlockChainConfig):
     REDIS_PORT = int(os.getenv('REDIS_PORT_6379_TCP_PORT', 6379))
     REDIS_PASSWORD = os.getenv('REDIS_ENV_REDIS_AUTH')
     REDIS_DB = int(os.getenv('REDIS_ENV_REDIS_DB', 0))
+
+    OPENWEATHERMAP_APPID = os.getenv('OPENWEATHERMAP_APPID', '')

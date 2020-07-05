@@ -1,8 +1,7 @@
 import json
+from lxml import etree
 
 import requests
-
-from lxml import etree
 
 
 class Parser():

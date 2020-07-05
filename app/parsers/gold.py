@@ -1,4 +1,4 @@
-from parsers.parsers import HtmlParser
+from parsers.base import HtmlParser
 
 
 class GoldIcbcParser(HtmlParser):

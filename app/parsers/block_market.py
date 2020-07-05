@@ -1,31 +1,14 @@
-from datetime import datetime
-
 from flask import current_app
 
-from app.parsers import Dollar
-from .parsers import JsonParser
+from parsers.doller import DollarAnseoParser
+from parsers.base import JsonParser
+
+Dollar = DollarAnseoParser
 
 
-class Bitcoin(JsonParser):
+class BlockMarketMifengchaParser(JsonParser):
     def set_config(self):
-        self.url = 'https://www.btctrade.com/ajax/imtickerall'
-        self.patterns = {
-            'BTC 买入价(人民币)': 'data.ybct.buy',
-            'BTC 卖出价(人民币)': 'data.ybct.sell',
-        }
-
-    def after_parse(self):
-        btc_buy = float(self.data['BTC 买入价(人民币)'])
-        btc_sell = float(self.data['BTC 卖出价(人民币)'])
-        btc = 1 / ((btc_buy + btc_sell) / 2)
-        self.data['BTC(人民币)'] = round(btc, 2)
-        del self.data['BTC 买入价(人民币)']
-        del self.data['BTC 卖出价(人民币)']
-
-
-class BlockMarketJson(JsonParser):
-    def set_config(self):
-        self.url = 'https://block.cc/api/v1/coin/flow?size=2000&orderby=-1'
+        self.url = 'https://www.mifengcha.com/api/v1/coin/flow?size=2000&orderby=-1'
         self.patterns = {
             'list': 'data.list',
         }
@@ -33,7 +16,7 @@ class BlockMarketJson(JsonParser):
     def after_parse(self):
         data = {i['symbol']: i for i in self.data['list']}
 
-        dollar_price = float(Dollar.get_data()['美元/人民币(中间价)'])
+        dollar_price = float(Dollar.get_data()['usd'])
 
         current_market = {currency: round(dollar_price * float(data[currency]['price']), 2)
                           for currency in current_app.config['BLOCK_CURRENT_LIST']
@@ -79,26 +62,9 @@ class BlockMarketJson(JsonParser):
         }
 
 
-class FutureWeather(JsonParser):
-    def set_config(self):
-        self.url = 'http://api.openweathermap.org/data/2.5/forecast?q=fuzhou&APPID=db97196be09b5c80f170423ac3799431&mode=json&lang=zh_cn&units=metric'
-        self.patterns = {
-            'list': 'list',
-        }
+if __name__ == '__main__':
+    from manage import app
+    from pprint import pprint
 
-    def after_parse(self):
-        _ = []
-        li = self.data
-        for i in li['list']:
-            i['dt_txt'] = datetime.fromtimestamp(int(i['dt'])).strftime("%Y-%m-%d %H:%M:%S")
-            i['dt_txt'] = i['dt_txt'][5:16]
-            i['main']['temp'] = round(float(i['main']['temp']))
-            _.append({
-                'description': i['weather'][0]['description'],
-                'temp': i['main']['temp'],
-                'pressure': i['main']['pressure'],
-                'humidity': i['main']['humidity'],
-                'dt_txt': i['dt_txt'],
-                'dt': i['dt'],
-            })
-        self.data = _
+    with app.app_context():
+        pprint(BlockMarketMifengchaParser()['data'])
