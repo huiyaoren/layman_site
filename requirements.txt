@@ -3,4 +3,5 @@ Flask-SQLAlchemy
 lxml
 requests
 flask-cors
+flask-login
 pprint
