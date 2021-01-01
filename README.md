@@ -1,8 +1,8 @@
-# layman_site
+# LaymanSite
 
 ![image](./doc/20180607135046.png)
 
-## 关于 layman_site
+## 关于 LaymanSite
 
 layman_site 是一个 python web 服务, 基于 flask 框架.
 
