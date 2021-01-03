@@ -1,3 +1,5 @@
+from datetime import datetime
+
 food_list = [
     {'brand': '', 'name': '五香黄花鱼', 'count': 1, 'expiration_data': '2021-08-16', },
     {'brand': '', 'name': '五香带鱼', 'count': 2, 'expiration_data': '2022-07-17', },
@@ -18,10 +20,19 @@ food_list = [
     {'brand': '惠尔康', 'name': '牛奶花生', 'count': 8, 'expiration_data': '2022-10-23', },
     {'brand': '', 'name': '柳州螺蛳粉', 'count': 4, 'expiration_data': '2021-05-30', },
     {'brand': '', 'name': '可口可乐', 'count': 12, 'expiration_data': '2021-04-04', },
+    {'brand': '小猪呵呵', 'name': '午餐肉', 'count': 3, 'expiration_data': '2023-11-09', },
+    {'brand': '罗锦记', 'name': '热干面', 'count': 1, 'expiration_data': '2021-05-06', },
+    {'brand': '高人一筹', 'name': '鲷鱼', 'count': 3, 'expiration_data': '2023-12-05', },
+    {'brand': '四季宝', 'name': '颗粒花生酱', 'count': 1, 'expiration_data': '2022-02-08', },
+    {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2022-02-24', },
+    {'brand': '惠尔康', 'name': '牛奶花生', 'count': 12, 'expiration_data': '2022-08-30', },
+    {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2020-04-24', },
 ]
 
-if __name__ == '__main__':
-    r = sorted(food_list, key=lambda x:x['expiration_data'])
-    for i in r:
-        print('{} | {}{} * {}'.format(i['expiration_data'], i['brand'], i['name'], i['count']))
+get_date = lambda expiration_data: datetime(*[int(i) for i in expiration_data.split('-')])
 
+if __name__ == '__main__':
+    r = sorted(food_list, key=lambda x: x['expiration_data'])
+    for i in r:
+        delta = get_date(i['expiration_data']) - datetime.now()
+        print('{} | {} |{}{} * {}'.format(i['expiration_data'], delta.days, i['brand'], i['name'], i['count']))
