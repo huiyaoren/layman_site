@@ -27,6 +27,7 @@ food_list = [
     {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2022-02-24', },
     {'brand': '惠尔康', 'name': '牛奶花生', 'count': 12, 'expiration_data': '2022-08-30', },
     {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2020-04-24', },
+    {'brand': '霸蛮', 'name': '猪油拌粉', 'count': 9, 'expiration_data': '2021-09-19', },
 ]
 
 get_date = lambda expiration_data: datetime(*[int(i) for i in expiration_data.split('-')])
