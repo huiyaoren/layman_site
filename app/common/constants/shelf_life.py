@@ -8,7 +8,6 @@ food_list = [
     {'brand': 'aka', 'name': '白砂糖', 'count': 1, 'expiration_data': '2021-09-10', },
     {'brand': 'aka', 'name': '冰糖', 'count': 1, 'expiration_data': '2022-04-09', },
     {'brand': '馋味佬', 'name': '热干面', 'count': 2, 'expiration_data': '2022-02-12', },
-    {'brand': '', 'name': '肉酱米线', 'count': 2, 'expiration_data': '2020-09-21', },
     {'brand': '异人家', 'name': '南昌拌粉', 'count': 1, 'expiration_data': '2021-04-28', },
     {'brand': '水之缘', 'name': '南昌拌粉', 'count': 3, 'expiration_data': '2021-02-23', },
     {'brand': '古龙', 'name': '花生汤', 'count': 5, 'expiration_data': '2023-05-27', },
@@ -26,7 +25,7 @@ food_list = [
     {'brand': '四季宝', 'name': '颗粒花生酱', 'count': 1, 'expiration_data': '2022-02-08', },
     {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2022-02-24', },
     {'brand': '惠尔康', 'name': '牛奶花生', 'count': 12, 'expiration_data': '2022-08-30', },
-    {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2020-04-24', },
+    {'brand': '四季宝', 'name': '柔滑花生酱', 'count': 1, 'expiration_data': '2022-02-24', },
     {'brand': '霸蛮', 'name': '猪油拌粉', 'count': 9, 'expiration_data': '2021-09-19', },
 ]
 
