@@ -1,6 +1,18 @@
-from .parsers import *
-from .html import *
-from .json import *
+from .block_market import *
+from .daily import *
+from .doller import *
+from .future_weather import *
+from .gold import *
+from .weather import *
+
+parsers = {
+    'weather': Weather2345Parser,
+    'gold': GoldIcbcParser,
+    'dollar': DollarAnseoParser,
+    'block-market': BlockMarketMifengchaParser,
+    'future-weather': FutureWeatherOpenweathermapParser,
+    'daily': DailyZhihuParser,
+}
 
 
 def parser_data(parser_name):
@@ -8,19 +20,3 @@ def parser_data(parser_name):
     Parser = parsers[name]
     p = Parser()
     return p['data']
-
-
-parsers = {
-    'weather': Weather,
-    'gold': Gold,
-    'bitcoin': Bitcoin,
-    'blockMarket': BlockMarketJson,
-    'dollar': Dollar,
-    'futureWeather': FutureWeather,
-    'zhihuDaily': ZhihuDaily,
-
-    'block_market': BlockMarketJson,
-    'future_weather': FutureWeather,
-    'zhihu_daily': ZhihuDaily,
-}
-

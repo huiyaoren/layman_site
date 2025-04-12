@@ -5,12 +5,12 @@ from .default import DefaultConfig, Config
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+try:
+    from .local import *
+except ImportError:
+    pass
+
 config = {
     'config': Config,
     'default': DefaultConfig,
 }
-
-try:
-    from local import *
-except ImportError:
-    pass

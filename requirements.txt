@@ -1,7 +1,7 @@
 Flask
-Flask-Login
 Flask-SQLAlchemy
-Flask-WTF
 lxml
 requests
 flask-cors
+flask-login
+pprint
